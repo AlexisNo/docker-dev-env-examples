@@ -1,0 +1,45 @@
+[color]
+  ui = auto
+  branch = auto
+  diff = auto
+  interactive = auto
+  status = auto
+  pager = true
+
+[core]
+  editor = vim
+  pager = less -FRSX
+  autocrlf = input
+
+[merge]
+  tool = vimdiff
+
+[push]
+  default = current
+
+[pull]
+  rebase = true
+  default = current
+
+[alias]
+  cl = clone
+  co = checkout
+  ci = commit
+  cm = commit -m
+  cma = commit -m -a
+  st = status
+  br =  branch
+  su = submodule update
+  rh = reset --hard
+  diff = diff --word-diff
+
+  sl = stash list
+  sa = stash apply
+  sa = stash pop
+  ss = stash save
+
+  spr = "!f(){ git stash && git pull --rebase && git stash pop; };f"
+
+  ; Powerfull history commands
+  graph = log --pretty=format:'%C(yellow)%h %Creset%s%C(green)%d %Cred[%cr] %C(bold blue)<%an>' --graph
+  hist = log --pretty=format:'%C(yellow)%h %Cred[%cd] %Creset%s%Cgreen%d %C(bold blue)<%an>' --raw --date=local
