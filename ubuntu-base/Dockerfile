@@ -1,15 +1,10 @@
-# Ubuntu Dockerfile
-# Create a basic Docker image
-
-
 # Use phusion/baseimage as base image.
 FROM phusion/baseimage:0.9.15
 
-# Disable ssh (use nsenter or  instead)
-RUN rm -rf /etc/service/sshd /etc/my_init.d/00_regen_ssh_host_keys.sh
-
-
 MAINTAINER Alexis N-o "alexis@henaut.net"
+
+# Disable ssh (use nsenter instead)
+RUN rm -rf /etc/service/sshd /etc/my_init.d/00_regen_ssh_host_keys.sh
 
 # Install basic packages.
 RUN apt-get update && apt-get install -y software-properties-common zsh curl wget git htop unzip vim telnet
