@@ -11,7 +11,7 @@ RUN apt-get update && apt-get -y install apache2 php5 php5-cli php5-xsl php5-xde
 # Replace apache default page by phpinfo
 RUN echo "<?php echo phpinfo();" >> /var/www/html/index.php && rm /var/www/html/index.html
 
-# Configure xdebug
+# Configure Xdebug
 RUN echo "xdebug.remote_enable=1" >> /etc/php5/apache2/conf.d/20-xdebug.ini
 RUN echo "xdebug.remote_connect_back=1" >> /etc/php5/apache2/conf.d/20-xdebug.ini
 RUN echo "xdebug.profiler_enable_trigger=1" >> /etc/php5/apache2/conf.d/20-xdebug.ini

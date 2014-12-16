@@ -10,9 +10,10 @@ Apache serve a phpinfo() page. To test it and obtain information about the confi
 ```
 docker run -d -p 80:80 alexisno/apache2-php5
 ```
-* `docker run ... alexisno/apache2-php5` Run Apache in a new container
+* `docker run -d -p 80:80 alexisno/apache2-php5` Run Apache in a new container
 * `-d` Detached mode: run container in the background
-* `-p 80:80` Publish the container's port 80 to the host so you can connect to the sever
+* `-p 80:80` Publish the container's port 80 on the host so you can connect to the sever
+
 Open a brower at http://localhost/
 
 
@@ -22,7 +23,8 @@ This image should be used as a basic image for any project.
 * Create an apache virtualhost for the development environment.
 * Create a Dockerfile with your project dependencies and add the virtualhost to it's configuration.
 * Create you own image with the `docker build` command. Do not forget to specify a tag.
-Run your new image with a similar command:
+
+Run your new image with a command similar to this:
 ```
 docker run -d -p 80:80 -v /path/to/your/sources:/var/www/project-name -v /path/to/store/apache/logs:/var/log/apache2 your-image-tag
 ```
@@ -32,20 +34,17 @@ docker run -d -p 80:80 -v /path/to/your/sources:/var/www/project-name -v /path/t
 
 The image comes with a script to generate self signed certificates in `/opt/gencert.sh`
 
-Usage:
+Usage in child Dockerfile:
 ```
-$ /opt/gencert.sh <domain>
-$ mkdir -p  /usr/local/apache/conf
-$ cp <domain>.crt /usr/local/apache/conf/ssl.crt
-$ cp <domain>.key /usr/local/apache/conf/ssl.key
+RUN /gencert.sh <domain>
 ```
 
 Virtualhost configuration:
 ```
 <VirtualHost *:443>
   SSLEngine on
-  SSLCertificateFile /usr/local/apache/conf/ssl.crt
-  SSLCertificateKeyFile /usr/local/apache/conf/ssl.key
+  SSLCertificateFile /usr/local/apache/conf/<domain>.crt
+  SSLCertificateKeyFile /usr/local/apache/conf/<domain>.key
   # SSL Protocol Adjustments:
   BrowserMatch "MSIE [2-6]" \
                   nokeepalive ssl-unclean-shutdown \
@@ -58,8 +57,8 @@ Virtualhost configuration:
 
 </VirtualHost>
 ```
+Replace `<domain>` with your developement hostname.
 
+### Xdebug configuration
 
-### xDebug configuration
-
-xdebug is configurated to accept any connection with appropriate request parameters.
+Xdebug is configurated to accept any connection. Just send the appropriate request parameters.
