@@ -6,16 +6,23 @@ Apache php5 webserver
 
 ### Configuration
 
+Apache, php5, postfix, Xdebug, composer, phpunit, phing
+
 Apache serve a phpinfo() page. To test it and obtain information about the configuration:
 ```
 docker run -d -p 80:80 alexisno/apache2-php5
 ```
-* `docker run -d -p 80:80 alexisno/apache2-php5` Run Apache in a new container
+* `docker run ... alexisno/apache2-php5` Run Apache in a new container
 * `-d` Detached mode: run container in the background
 * `-p 80:80` Publish the container's port 80 on the host so you can connect to the sever
 
 Open a brower at http://localhost/
 
+Composer, phpunit and phing are available globally
+
+Postfix has a simple configuration that just allows PHP to send mails.
+
+Xdebug is configurated to accept any connection. Just send the appropriate request parameters.
 
 ### Common usage
 
@@ -58,7 +65,3 @@ Virtualhost configuration:
 </VirtualHost>
 ```
 Replace `<domain>` with your developement hostname.
-
-### Xdebug configuration
-
-Xdebug is configurated to accept any connection. Just send the appropriate request parameters.
