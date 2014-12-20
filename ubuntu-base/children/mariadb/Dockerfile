@@ -14,11 +14,11 @@ RUN service mysql start &&\
 
 # Add init-db.sh to allow to rebuild a database if /var/lib/mysql is empty
 # Useful when using a volume with "docker run -v /path/on/host:/var/lib/mysql"
-COPY init-db.sh /init-db.sh
+COPY /init-db.sh /init-db.sh
 RUN chmod +x /init-db.sh
 
 # Start mariadb sever
-COPY etc/my_init.d/10_start-mysql.sh /etc/my_init.d/10_start-mariadb.sh
+COPY /etc/my_init.d/10_start-mariadb.sh /etc/my_init.d/10_start-mariadb.sh
 RUN chmod +x /etc/my_init.d/10_start-mariadb.sh
 
 # Define mountable directories

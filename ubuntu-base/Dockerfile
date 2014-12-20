@@ -14,7 +14,7 @@ RUN wget --no-check-certificate http://install.ohmyz.sh -O - | /bin/zsh
 RUN chsh -s /bin/zsh
 
 # Apply custom theme and disable auto-update
-ADD /root/.oh-my-zsh/themes/anoio-docker.zsh-theme root/.oh-my-zsh/themes/anoio-docker.zsh-theme
+COPY /root/.oh-my-zsh/themes/anoio-docker.zsh-theme /root/.oh-my-zsh/themes/anoio-docker.zsh-theme
 RUN sed -i 's/ZSH_THEME="robbyrussell"/ZSH_THEME="anoio-docker"/g' /root/.zshrc
 RUN sed -i 's/# DISABLE_AUTO_UPDATE=true/DISABLE_AUTO_UPDATE=true/g' /root/.zshrc
 
@@ -23,7 +23,7 @@ RUN echo TERM=xterm >> /root/.zshrc
 
 
 # Aplly custom .gitconfig
-ADD /root/.gitconfig root/.gitconfig
+COPY /root/.gitconfig /root/.gitconfig
 
 
 # Clean up APT when done.
