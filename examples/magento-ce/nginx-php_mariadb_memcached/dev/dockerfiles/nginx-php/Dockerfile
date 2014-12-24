@@ -26,4 +26,5 @@ COPY /etc/n98-magerun.yaml /etc/n98-magerun.yaml
 
 # Install Magento if sources don't exist
 COPY /etc/my_init.d/20_install-magento.sh /etc/my_init.d/20_install-magento.sh
+COPY /var/init/local.xml /var/init/local.xml
 RUN chmod +x /etc/my_init.d/20_install-magento.sh

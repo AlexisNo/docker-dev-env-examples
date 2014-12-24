@@ -19,7 +19,7 @@ function build()
                 echo "# Build docker image \"$IMAGENAME\""
                 echo "#                                             #"
                 echo "###############################################"
-                CMD="docker build --no-cache=true -t alexisno/$IMAGENAME $1"
+                CMD="docker build -t alexisno/$IMAGENAME $1"
                 echo ">> $CMD"
                 ${CMD}
             fi

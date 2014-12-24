@@ -27,6 +27,7 @@ RUN mv n98-magerun.phar /usr/local/bin/n98-magerun.phar
 RUN chmod +x /usr/local/bin/n98-magerun.phar
 COPY /etc/n98-magerun.yaml /etc/n98-magerun.yaml
 
-# Install Magento if sources don't exist
+# Install Magento if sources do not exist
 COPY /etc/my_init.d/30_install-magento.sh /etc/my_init.d/30_install-magento.sh
+COPY /var/init/local.xml /var/init/local.xml
 RUN chmod +x /etc/my_init.d/30_install-magento.sh

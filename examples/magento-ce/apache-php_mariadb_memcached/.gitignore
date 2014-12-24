@@ -1,2 +1,4 @@
-dev/data
-src
+dev/data/*
+!dev/data/README.txt
+src/*
+!src/README.txt
