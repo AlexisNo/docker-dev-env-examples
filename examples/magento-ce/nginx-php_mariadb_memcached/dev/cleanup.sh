@@ -6,5 +6,5 @@ DIR="$( cd "$( dirname "$0" )" && pwd )"
 $DIR/rm.sh
 $DIR/rmi.sh
 
-rm -r $DIR/data
-rm -r $DIR/../src
+rm -r $DIR/data/*
+rm -r $DIR/../src/*

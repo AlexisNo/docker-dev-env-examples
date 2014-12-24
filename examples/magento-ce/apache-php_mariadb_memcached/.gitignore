@@ -1,4 +1,4 @@
 dev/data/*
-!dev/data/README.txt
+!dev/data/README.md
 src/*
-!src/README.txt
+!src/README.md
