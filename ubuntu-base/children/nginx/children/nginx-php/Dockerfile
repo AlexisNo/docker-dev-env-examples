@@ -1,25 +1,32 @@
 # Pull base image
 FROM alexisno/nginx
 
-# Prepare postfix configuration
-RUN echo "postfix postfix/main_mailer_type select Internet Site" | debconf-set-selections
-RUN echo "postfix postfix/mailname string mailname" | debconf-set-selections
-
 # Install php-fpm, xdebug and postfix
-RUN sudo apt-get update && apt-get -y install php5-fpm php5-cli php5-xdebug php5-xsl postfix
+RUN sudo apt-get update && apt-get -y install php5-fpm php5-cli php5-xdebug php5-xsl  build-essential ruby1.9.1-dev libsqlite3-dev
+
+# Install mailcatcher
+RUN gem install mailcatcher
+RUN sed -i -e "s/.*sendmail_path =.*/sendmail_path = \/usr\/bin\/env catchmail -f address@example\.com/" /etc/php5/fpm/php.ini
+RUN sed -i -e "s/.*sendmail_path =.*/sendmail_path = \/usr\/bin\/env catchmail -f address@example\.com/" /etc/php5/cli/php.ini
 
 # Replace Nginx default page by phpinfo
 RUN mkdir -p /var/www/html/
 RUN echo "<?php echo phpinfo();" >> /var/www/html/index.php
+
+# Create default virtualhosts
 COPY /etc/nginx/sites-available/phpinfo.conf /etc/nginx/sites-available/phpinfo.conf
 RUN ln -s /etc/nginx/sites-available/phpinfo.conf /etc/nginx/sites-enabled/phpinfo.conf
 RUN rm /etc/nginx/sites-enabled/default
 RUN rm /etc/nginx/sites-enabled/default-ssl
 
+# Setup PHP timezone
+RUN echo date.timezone=Europe/Paris >> /etc/php5/fpm/conf.d/01-timezone.ini
+
 # Configure Xdebug
 RUN echo "xdebug.remote_enable=1" >> /etc/php5/fpm/conf.d/20-xdebug.ini
 RUN echo "xdebug.remote_connect_back=1" >> /etc/php5/fpm/conf.d/20-xdebug.ini
 RUN echo "xdebug.profiler_enable_trigger=1" >> /etc/php5/fpm/conf.d/20-xdebug.ini
+RUN echo "xdebug.max_nesting_level=250" >> /etc/php5/fpm/conf.d/20-xdebug.ini
 
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php
@@ -33,8 +40,8 @@ RUN composer global require "phpunit/phpunit=*"
 RUN composer global require 'theseer/phpdox=@stable'
 ENV PATH $PATH:/opt/composer/vendor/bin/
 
-# Start Postfix and php-fpm
-COPY /etc/my_init.d/03_start-postfix.sh /etc/my_init.d/03_start-postfix.sh
-RUN chmod +x /etc/my_init.d/03_start-postfix.sh
+# Start Mailcatcher and php-fpm
+COPY /etc/my_init.d/03_mailcatcher.sh /etc/my_init.d/03_mailcatcher.sh
+RUN chmod +x /etc/my_init.d/03_mailcatcher.sh
 COPY /etc/my_init.d/06_start-php5-fpm.sh /etc/my_init.d/06_start-php5-fpm.sh
 RUN chmod +x /etc/my_init.d/06_start-php5-fpm.sh

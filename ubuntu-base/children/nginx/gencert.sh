@@ -61,7 +61,6 @@ fail_if_error $?
 openssl x509 -req -days 3650 -in $DOMAIN.csr -signkey $DOMAIN.key -out $DOMAIN.crt
 fail_if_error $?
 
-mkdir -p /usr/local/apache/conf/
 mv $DOMAIN.crt /etc/ssl/certs/
 mv $DOMAIN.key /etc/ssl/private/
 

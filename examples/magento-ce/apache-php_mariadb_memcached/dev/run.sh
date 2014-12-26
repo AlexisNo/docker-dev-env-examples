@@ -17,7 +17,7 @@ docker run -d -p 3306:3306 -v $DIR/data/mysql:/var/lib/mysql --name magento-ce-m
 
 # Create webserver container
 echo "Running apache-php container"
-docker run -d -p 80:80 -p 443:443\
+docker run -d -p 80:80 -p 443:443 -p 1080:1080\
            -v $DIR/../src:/var/www/magento-ce\
            -v $DIR/data/log/apache2:/var/log/apache2\
            --link magento-ce-memcached:memcached\
