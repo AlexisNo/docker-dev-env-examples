@@ -8,12 +8,16 @@ RUN apt-get update && apt-get -y install apache2 php5 php5-cli php5-xdebug php5-
 RUN echo "<?php echo phpinfo();" >> /var/www/html/index.php && rm /var/www/html/index.html
 
 # Install mailcatcher
-RUN gem install mailcatcher
+RUN gem install mailcatcher --no-rdoc --no-ri
 RUN sed -i -e "s/.*sendmail_path =.*/sendmail_path = \/usr\/bin\/env catchmail -f address@example\.com/" /etc/php5/apache2/php.ini
 RUN sed -i -e "s/.*sendmail_path =.*/sendmail_path = \/usr\/bin\/env catchmail -f address@example\.com/" /etc/php5/cli/php.ini
 
 # Setup PHP timezone
 RUN echo date.timezone=Europe/Paris >> /etc/php5/apache2/conf.d/01-timezone.ini
+
+# Display all errors
+RUN echo "error_reporting = E_ALL\ndisplay_startup_errors = 1\ndisplay_errors = 1" >> /etc/php5/apache2/conf.d/01-errors.ini
+RUN echo "error_reporting = E_ALL\ndisplay_startup_errors = 1\ndisplay_errors = 1" >> /etc/php5/cli/conf.d/01-errors.ini
 
 # Configure Xdebug
 RUN echo "xdebug.remote_enable=1" >> /etc/php5/apache2/conf.d/20-xdebug.ini

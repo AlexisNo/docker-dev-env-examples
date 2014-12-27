@@ -1,5 +1,8 @@
 FROM alexisno/apache-php
 
+ENV STORE_ADDRESS=www.magento.local
+ENV ADMIN_ADDRESS=admin.magento.local
+
 # Install the php packages to run Magento
 RUN apt-get update && apt-get install -y php5-dev php5-curl php5-mcrypt php5-gd php5-mysql php5-memcached
 
@@ -10,12 +13,14 @@ RUN php5enmod mcrypt
 RUN a2enmod rewrite
 
 # Install self signed certificates for admin and front
-RUN /gencert.sh www.magento-ce.local
-RUN /gencert.sh admin.magento-ce.local
+RUN /gencert.sh $STORE_ADDRESS
+RUN /gencert.sh $ADMIN_ADDRESS
 
 # Add and enable virtualhost
-COPY /etc/apache2/sites-available/magento-ce.conf /etc/apache2/sites-available/magento-ce.conf
-RUN a2ensite magento-ce
+COPY /etc/apache2/sites-available/magento.conf /etc/apache2/sites-available/magento.conf
+RUN sed -i -e "s/{{STORE_ADDRESS}}/$STORE_ADDRESS/" /etc/apache2/sites-available/magento.conf
+RUN sed -i -e "s/{{ADMIN_ADDRESS}}/$ADMIN_ADDRESS/" /etc/apache2/sites-available/magento.conf
+RUN a2ensite magento
 
 # Save sessions in memcached
 RUN sed -i -e "s/^session.save_handler = files/session.save_handler = memcached/" /etc/php5/apache2/php.ini

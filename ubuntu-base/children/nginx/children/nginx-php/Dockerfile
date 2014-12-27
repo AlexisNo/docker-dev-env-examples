@@ -5,9 +5,9 @@ FROM alexisno/nginx
 RUN sudo apt-get update && apt-get -y install php5-fpm php5-cli php5-xdebug php5-xsl  build-essential ruby1.9.1-dev libsqlite3-dev
 
 # Install mailcatcher
-RUN gem install mailcatcher
-RUN sed -i -e "s/.*sendmail_path =.*/sendmail_path = \/usr\/bin\/env catchmail -f address@example\.com/" /etc/php5/fpm/php.ini
-RUN sed -i -e "s/.*sendmail_path =.*/sendmail_path = \/usr\/bin\/env catchmail -f address@example\.com/" /etc/php5/cli/php.ini
+RUN gem install mailcatcher --no-rdoc --no-ri
+RUN sed -i -e "s/.*sendmail_path =.*/sendmail_path = \/usr\/bin\/env \/usr\/local\/bin\/catchmail -f address@example\.com/" /etc/php5/fpm/php.ini
+RUN sed -i -e "s/.*sendmail_path =.*/sendmail_path = \/usr\/bin\/env \/usr\/local\/bin\/catchmail -f address@example\.com/" /etc/php5/cli/php.ini
 
 # Replace Nginx default page by phpinfo
 RUN mkdir -p /var/www/html/
@@ -18,6 +18,10 @@ COPY /etc/nginx/sites-available/phpinfo.conf /etc/nginx/sites-available/phpinfo.
 RUN ln -s /etc/nginx/sites-available/phpinfo.conf /etc/nginx/sites-enabled/phpinfo.conf
 RUN rm /etc/nginx/sites-enabled/default
 RUN rm /etc/nginx/sites-enabled/default-ssl
+
+# Display all errors
+RUN echo "error_reporting = E_ALL\ndisplay_startup_errors = 1\ndisplay_errors = 1" >> /etc/php5/fpm/conf.d/01-errors.ini
+RUN echo "error_reporting = E_ALL\ndisplay_startup_errors = 1\ndisplay_errors = 1" >> /etc/php5/cli/conf.d/01-errors.ini
 
 # Setup PHP timezone
 RUN echo date.timezone=Europe/Paris >> /etc/php5/fpm/conf.d/01-timezone.ini
