@@ -4,4 +4,4 @@
 DIR="$( cd "$( dirname "$0" )" && pwd )"
 
 $DIR/rm.sh
-docker rmi magento-ce-nginx-php-image
+docker rmi magento-nginx-php-image

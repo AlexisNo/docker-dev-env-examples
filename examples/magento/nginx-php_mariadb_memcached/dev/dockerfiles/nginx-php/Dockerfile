@@ -1,5 +1,8 @@
 FROM alexisno/nginx-php
 
+ENV STORE_ADDRESS=www.magento.local
+ENV ADMIN_ADDRESS=admin.magento.local
+
 # Install the php packages to run Magento
 RUN apt-get update && apt-get install -y php5-dev php5-curl php5-mcrypt php5-gd php5-mysql php5-memcached
 
@@ -7,12 +10,14 @@ RUN apt-get update && apt-get install -y php5-dev php5-curl php5-mcrypt php5-gd 
 RUN php5enmod mcrypt
 
 # Install self signed certificates for admin and front
-RUN /gencert.sh www.magento-ce.local
-RUN /gencert.sh admin.magento-ce.local
+RUN /gencert.sh $STORE_ADDRESS
+RUN /gencert.sh $ADMIN_ADDRESS
 
 # Add and enable virtualhost
-COPY /etc/nginx/sites-available/magento-ce.conf /etc/nginx/sites-available/magento-ce.conf
-RUN ln -s /etc/nginx/sites-available/magento-ce.conf /etc/nginx/sites-enabled/magento-ce.conf
+COPY /etc/nginx/sites-available/magento.conf /etc/nginx/sites-available/magento.conf
+RUN sed -i -e "s/{{STORE_ADDRESS}}/$STORE_ADDRESS/" /etc/nginx/sites-available/magento.conf
+RUN sed -i -e "s/{{ADMIN_ADDRESS}}/$ADMIN_ADDRESS/" /etc/nginx/sites-available/magento.conf
+RUN ln -s /etc/nginx/sites-available/magento.conf /etc/nginx/sites-enabled/magento.conf
 
 # Save sessions in memcached
 RUN sed -i -e "s/^session.save_handler = files/session.save_handler = memcached/" /etc/php5/fpm/php.ini
@@ -28,3 +33,7 @@ COPY /etc/n98-magerun.yaml /etc/n98-magerun.yaml
 COPY /etc/my_init.d/20_install-magento.sh /etc/my_init.d/20_install-magento.sh
 COPY /var/init/local.xml /var/init/local.xml
 RUN chmod +x /etc/my_init.d/20_install-magento.sh
+
+
+# Clean up APT when done.
+RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*

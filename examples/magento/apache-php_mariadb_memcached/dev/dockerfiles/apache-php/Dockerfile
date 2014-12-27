@@ -36,3 +36,7 @@ COPY /etc/n98-magerun.yaml /etc/n98-magerun.yaml
 COPY /etc/my_init.d/30_install-magento.sh /etc/my_init.d/30_install-magento.sh
 COPY /var/init/local.xml /var/init/local.xml
 RUN chmod +x /etc/my_init.d/30_install-magento.sh
+
+
+# Clean up APT when done.
+RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
