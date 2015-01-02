@@ -5,7 +5,7 @@ DIR="$( cd "$( dirname "$0" )" && pwd )"
 
 $DIR/stop.sh
 
-declare -a containers=(magento-memcached magento-mariadb magento-nginx-php)
+declare -a containers=(magento-mailcatcher magento-memcached magento-mariadb magento-nginx-php)
 
 for var in "${containers[@]}"
 do

@@ -18,7 +18,7 @@ RUN ln -s /etc/nginx/sites-available/default-ssl /etc/nginx/sites-enabled/defaul
 COPY /etc/my_init.d/10_start-nginx.sh /etc/my_init.d/10_start-nginx.sh
 RUN chmod +x /etc/my_init.d/10_start-nginx.sh
 
-# Expose http port
+# Expose http and https ports
 EXPOSE 80 443
 
 

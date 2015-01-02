@@ -1,6 +1,6 @@
 #!/bin/bash
 
-declare -a containers=(magento-memcached magento-mariadb magento-apache-php)
+declare -a containers=(magento-mailcatcher magento-memcached magento-mariadb magento-apache-php)
 
 for var in "${containers[@]}"
 do

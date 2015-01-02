@@ -7,13 +7,14 @@ RUN apt-get update && apt-get -y install apache2 php5 php5-cli php5-xdebug php5-
 # Replace Apache default page by phpinfo
 RUN echo "<?php echo phpinfo();" >> /var/www/html/index.php && rm /var/www/html/index.html
 
-# Install mailcatcher
-RUN gem install mailcatcher --no-rdoc --no-ri
-RUN sed -i -e "s/.*sendmail_path =.*/sendmail_path = \/usr\/bin\/env catchmail -f address@example\.com/" /etc/php5/apache2/php.ini
-RUN sed -i -e "s/.*sendmail_path =.*/sendmail_path = \/usr\/bin\/env catchmail -f address@example\.com/" /etc/php5/cli/php.ini
-
 # Setup PHP timezone
 RUN echo date.timezone=Europe/Paris >> /etc/php5/apache2/conf.d/01-timezone.ini
+
+# Setup PHP to use the alexisno/mailcatcher image to send mails
+# The name of the linked container must be "mailcatcher"
+RUN gem install mailcatcher --no-rdoc --no-ri
+RUN sed -i -e "s/.*sendmail_path =.*/sendmail_path = \/usr\/bin\/env catchmail --smtp-ip mailcatcher -f address@example\.com/" /etc/php5/apache2/php.ini
+RUN sed -i -e "s/.*sendmail_path =.*/sendmail_path = \/usr\/bin\/env catchmail --smtp-ip mailcatcher -f address@example\.com/" /etc/php5/cli/php.ini
 
 # Display all errors
 RUN echo "error_reporting = E_ALL\ndisplay_startup_errors = 1\ndisplay_errors = 1" >> /etc/php5/apache2/conf.d/01-errors.ini
@@ -30,7 +31,7 @@ RUN curl -sS https://getcomposer.org/installer | php
 RUN chmod +x composer.phar
 RUN mv composer.phar /usr/local/bin/composer
 
-# Install phing PHPUnit PHPDocx
+# Install phing, PHPUnit and PHPDocx
 ENV COMPOSER_HOME /opt/composer
 RUN composer global require "phing/phing=2.*"
 RUN composer global require "phpunit/phpunit=*"
@@ -48,14 +49,12 @@ RUN /gencert.sh localhost
 COPY /etc/apache2/sites-available/000-default-ssl.conf /etc/apache2/sites-available/000-default-ssl.conf
 RUN a2ensite 000-default-ssl
 
-# Start Mailcatcher and Apache
-COPY /etc/my_init.d/10_mailcatcher.sh /etc/my_init.d/10_mailcatcher.sh
-RUN chmod +x /etc/my_init.d/10_mailcatcher.sh
-COPY /etc/my_init.d/20_start-apache2.sh /etc/my_init.d/20_start-apache2.sh
-RUN chmod +x /etc/my_init.d/20_start-apache2.sh
+# Start Apache
+COPY /etc/my_init.d/10_start-apache2.sh /etc/my_init.d/10_start-apache2.sh
+RUN chmod +x /etc/my_init.d/10_start-apache2.sh
 
-# Expose http and https ports and mailcatcher port
-EXPOSE 80 443 1080
+# Expose http and https ports
+EXPOSE 80 443
 
 
 # Clean up APT when done.
