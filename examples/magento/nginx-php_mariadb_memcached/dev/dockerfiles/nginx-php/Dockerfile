@@ -9,6 +9,10 @@ RUN apt-get update && apt-get install -y php5-dev php5-curl php5-mcrypt php5-gd 
 # Enable Mcrypt
 RUN php5enmod mcrypt
 
+# Save sessions in memcached
+RUN sed -i -e "s/^session.save_handler = files/session.save_handler = memcached/" /etc/php5/fpm/php.ini
+RUN sed -i -e "s/^;     session.save_path = \"N;\/path\"/session.save_path = \"memcached:11211\"/" /etc/php5/fpm/php.ini
+
 # Install self signed certificates for admin and front
 RUN /gencert.sh $STORE_ADDRESS
 RUN /gencert.sh $ADMIN_ADDRESS
@@ -18,10 +22,6 @@ COPY /etc/nginx/sites-available/magento.conf /etc/nginx/sites-available/magento.
 RUN sed -i -e "s/{{STORE_ADDRESS}}/$STORE_ADDRESS/" /etc/nginx/sites-available/magento.conf
 RUN sed -i -e "s/{{ADMIN_ADDRESS}}/$ADMIN_ADDRESS/" /etc/nginx/sites-available/magento.conf
 RUN ln -s /etc/nginx/sites-available/magento.conf /etc/nginx/sites-enabled/magento.conf
-
-# Save sessions in memcached
-RUN sed -i -e "s/^session.save_handler = files/session.save_handler = memcached/" /etc/php5/fpm/php.ini
-RUN sed -i -e "s/^;     session.save_path = \"N;\/path\"/session.save_path = \"memcached:11211\"/" /etc/php5/fpm/php.ini
 
 # Install magerun command line
 RUN wget https://raw.githubusercontent.com/netz98/n98-magerun/master/n98-magerun.phar

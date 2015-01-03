@@ -5,7 +5,7 @@ DIR="$( cd "$( dirname "$0" )" && pwd )"
 
 $DIR/stop.sh
 
-declare -a containers=(symfony-mailcatcher symfony-mariadb symfony-apache-php)
+declare -a containers=(express-mailcatcher express-nodejs express-nginx)
 
 for var in "${containers[@]}"
 do

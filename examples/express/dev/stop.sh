@@ -1,6 +1,6 @@
 #!/bin/bash
 
-declare -a containers=(symfony-mailcatcher symfony-mariadb symfony-apache-php)
+declare -a containers=(express-mailcatcher express-nodejs express-nginx)
 
 for var in "${containers[@]}"
 do

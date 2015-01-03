@@ -9,6 +9,10 @@ RUN apt-get update && apt-get install -y php5-dev php5-curl php5-mcrypt php5-gd 
 # Enable Mcrypt
 RUN php5enmod mcrypt
 
+# Save sessions in memcached
+RUN sed -i -e "s/^session.save_handler = files/session.save_handler = memcached/" /etc/php5/apache2/php.ini
+RUN sed -i -e "s/^;     session.save_path = \"N;\/path\"/session.save_path = \"memcached:11211\"/" /etc/php5/apache2/php.ini
+
 # Enable rewrite mod
 RUN a2enmod rewrite
 
@@ -21,10 +25,6 @@ COPY /etc/apache2/sites-available/magento.conf /etc/apache2/sites-available/mage
 RUN sed -i -e "s/{{STORE_ADDRESS}}/$STORE_ADDRESS/" /etc/apache2/sites-available/magento.conf
 RUN sed -i -e "s/{{ADMIN_ADDRESS}}/$ADMIN_ADDRESS/" /etc/apache2/sites-available/magento.conf
 RUN a2ensite magento
-
-# Save sessions in memcached
-RUN sed -i -e "s/^session.save_handler = files/session.save_handler = memcached/" /etc/php5/apache2/php.ini
-RUN sed -i -e "s/^;     session.save_path = \"N;\/path\"/session.save_path = \"memcached:11211\"/" /etc/php5/apache2/php.ini
 
 # Install magerun command line
 RUN wget https://raw.githubusercontent.com/netz98/n98-magerun/master/n98-magerun.phar
