@@ -5,15 +5,20 @@ FROM alexisno/ubuntu-base
 RUN add-apt-repository ppa:chris-lea/node.js
 RUN apt-get update && apt-get -y install python-software-properties python g++ make nodejs
 
-# Create node user and allow him to install npm packages globally
-RUN useradd node -d /home/node/ -s /bin/bash &&\
-    mkdir /home/node &&\
-    echo "prefix = ~/.node" >> /home/node/.npmrc &&\
-    export PATH="$PATH:$HOME/.node/bin" >> /home/node/.bashrc &&\
-    chown -R node:node /home/node
-
-# Install useful packages globally
-RUN sudo -H -u node npm install -g forever bower grunt-cli node-inspector
-
 # Clean up APT when done.
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+# Create node user
+RUN useradd node -m -d /home/node/ -s /bin/bash
+RUN mkdir -p /var/www && chown node:node /var/www
+RUN mkdir -p /var/log/forever && chown node:node /var/log/forever
+
+# Install npm packages globally with user node
+USER node
+ENV HOME /home/node/
+RUN echo "prefix = ~/.node" >> ~/.npmrc &&\
+    echo "export PATH='$PATH:~/.node/bin'" >> /home/node/.bashrc &&\
+    npm install -g forever bower grunt-cli node-inspector
+
+USER root
+ENV HOME /root/

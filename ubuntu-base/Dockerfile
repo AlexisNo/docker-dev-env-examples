@@ -22,7 +22,7 @@ RUN sed -i 's/# DISABLE_AUTO_UPDATE=true/DISABLE_AUTO_UPDATE=true/g' /root/.zshr
 RUN echo TERM=xterm >> /root/.zshrc
 
 
-# Aplly custom .gitconfig
+# Apply custom .gitconfig
 COPY /root/.gitconfig /root/.gitconfig
 
 

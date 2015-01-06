@@ -1,0 +1,4 @@
+dev/data/*
+src/*
+!dev/data/README.md
+!src/README.md
