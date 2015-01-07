@@ -6,6 +6,7 @@ RUN apt-get update && apt-get -y install apache2 php5 php5-cli php5-xdebug php5-
 
 # Replace Apache default page by phpinfo
 RUN echo "<?php echo phpinfo();" >> /var/www/html/index.php && rm /var/www/html/index.html
+RUN chown -R dev:dev /var/www
 
 # Setup PHP timezone
 RUN echo date.timezone=Europe/Paris >> /etc/php5/apache2/conf.d/01-timezone.ini
