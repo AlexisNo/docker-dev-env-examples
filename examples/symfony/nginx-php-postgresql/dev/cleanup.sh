@@ -4,5 +4,7 @@
 DIR="$( cd "$( dirname "$0" )" && pwd )"
 
 $DIR/rm.sh
+$DIR/rmi.sh
 
-docker rmi magento-apache-php-image
+rm -r $DIR/data
+rm -r $DIR/../src

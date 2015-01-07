@@ -8,14 +8,14 @@ if [ ! -d /var/www/magento/app ]; then
     echo "Install Magento"
     cd /var/www/magento
     sudo -H -u dev n98-magerun.phar install --dbHost="db"\
-                                                  --dbUser="root"\
-                                                  --dbPass=""\
-                                                  --dbName="magentodb"\
-                                                  --installSampleData=no\
-                                                  --useDefaultConfigParams=yes\
-                                                  --magentoVersionByName="magento-ce-1.9.0.1"\
-                                                  --installationFolder="."\
-                                                  --baseUrl=$ADMIN_ADDRESS
+                                            --dbUser="root"\
+                                            --dbPass=""\
+                                            --dbName="magentodb"\
+                                            --installSampleData=no\
+                                            --useDefaultConfigParams=yes\
+                                            --magentoVersionByName="magento-ce-1.9.0.1"\
+                                            --installationFolder="."\
+                                            --baseUrl=$ADMIN_ADDRESS
     sudo -H -u dev cp /var/init/local.xml /var/www/magento/app/etc/local.xml
     chmod -R 777 /var/www/magento/media /var/www/magento/var
 
