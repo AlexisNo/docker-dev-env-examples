@@ -55,10 +55,6 @@ RUN a2enmod ssl &&\
     /gencert.sh localhost &&\
     a2ensite 000-default-ssl
 
-# Start Apache
-COPY /etc/my_init.d/10_start-apache2.sh /etc/my_init.d/10_start-apache2.sh
-RUN chmod +x /etc/my_init.d/10_start-apache2.sh
-
 # Expose http and https ports
 EXPOSE 80 443
 
