@@ -9,4 +9,7 @@ if [ ! -d /var/lib/mysql/mysql ]; then
     service mysql start
     mysqladmin --silent --wait=30 ping
     mysql -e 'GRANT ALL PRIVILEGES ON *.* TO "root"@"%" WITH GRANT OPTION;'
+    service mysql stop
 fi
+
+mysqld

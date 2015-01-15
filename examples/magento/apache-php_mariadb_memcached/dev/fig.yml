@@ -18,8 +18,6 @@ db:
    - data/mysql:/var/lib/mysql
 memcached:
   image: alexisno/memcached
-  ports:
-   - "11211:11211"
 mailcatcher:
   image: alexisno/mailcatcher
   ports:

@@ -2,7 +2,9 @@
 FROM alexisno/ubuntu-base
 
 # Install basic packages
-RUN apt-get update && apt-get -y install nginx
+RUN apt-get update &&\
+    apt-get -y install nginx &&\
+    apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Add script to generate self signed certificates
 # Script from https://gist.github.com/bradland/1690807
@@ -14,13 +16,10 @@ RUN /gencert.sh localhost
 COPY /etc/nginx/sites-available/default-ssl /etc/nginx/sites-available/default-ssl
 RUN ln -s /etc/nginx/sites-available/default-ssl /etc/nginx/sites-enabled/default-ssl
 
-# Start Nginx
-COPY /etc/my_init.d/10_start-nginx.sh /etc/my_init.d/10_start-nginx.sh
-RUN chmod +x /etc/my_init.d/10_start-nginx.sh
+# Start Nginx with "daemon off"
+RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 
 # Expose http and https ports
 EXPOSE 80 443
 
-
-# Clean up APT when done.
-RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+CMD ["nginx"]

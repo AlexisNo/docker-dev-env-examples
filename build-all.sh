@@ -11,7 +11,7 @@ function build()
         BASENAME=${FILENAME##*/}
         if [ -f "$FILENAME" ]
         then
-            if [[ $BASENAME == "Dockerfile" ]]
+            if [[ ${BASENAME} == "Dockerfile" ]]
             then
                 IMAGENAME=${1##*/}
                 echo "###############################################"
@@ -21,7 +21,22 @@ function build()
                 echo "###############################################"
                 CMD="docker build -t alexisno/$IMAGENAME $1"
                 echo ">> $CMD"
+
                 ${CMD}
+                RETCODE=$?
+                if [ ${RETCODE} != 0 ];
+                then
+                    printf "Error : [$RETCODE] when building image '$IMAGENAME'"
+                    exit ${RETCODE}
+                fi
+
+                docker push alexisno/${IMAGENAME}
+                RET_CODE=$?
+                if [ ${RETCODE} != 0 ];
+                then
+                    printf "Error : [$RETCODE] when pushing image '$IMAGENAME'"
+                    exit ${RETCODE}
+                fi
             fi
         fi
     done

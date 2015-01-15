@@ -1,16 +1,16 @@
 #!/bin/bash
 
-# Retrieve current directory
-DIR="$( cd "$( dirname "$0" )" && pwd )"
+/usr/sbin/apache2 -DFOREGROUND
 
 # Install magento
 if [ ! -d /var/www/magento/app ]; then
     echo "Install Magento"
+
     cd /var/www/magento
     sudo -H -u dev n98-magerun.phar install --dbHost="db"\
                                             --dbUser="root"\
                                             --dbPass=""\
-                                            --dbName="magentodb"\
+                                            --dbName="magento"\
                                             --installSampleData=no\
                                             --useDefaultConfigParams=yes\
                                             --magentoVersionByName="magento-ce-1.9.0.1"\
