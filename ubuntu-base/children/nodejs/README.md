@@ -1,8 +1,5 @@
-Node.js Dockerfile for dev environment
-======================================
-
-Image to run Node.js applications
----------------------------------
+Node.js docker image for development environment
+================================================
 
 Globally installed npm packages:
  * forever

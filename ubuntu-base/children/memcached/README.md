@@ -1,10 +1,7 @@
-Memcached Dockerfile for dev environment
-========================================
+Memcached docker image for development environment
+==================================================
 
-Memcached server
-----------------
-
-### Configuration
+## Configuration
 
 Default memcached service configuration. Remote connection enabled.
 

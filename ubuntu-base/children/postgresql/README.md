@@ -1,5 +1,2 @@
-PostgreSQL dockerfile
+PostgreSQL docker image for development environment
 =====================
-
-PostgreSQL server
------------------

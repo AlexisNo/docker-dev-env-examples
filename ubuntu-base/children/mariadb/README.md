@@ -1,10 +1,7 @@
-MariaDB Dockerfile for dev environment
-======================================
+MariaDB docker image for development environment
+================================================
 
-MariaDB server
---------------
-
-### Configuration
+## Configuration
 
 The user `root` is accessible outside the container and has no password.
 

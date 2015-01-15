@@ -1,5 +1,2 @@
-MongoDB Dockerfile for dev environment
-======================================
-
-MongoDB server
---------------
+MongoDB  docker image for development environment
+=================================================

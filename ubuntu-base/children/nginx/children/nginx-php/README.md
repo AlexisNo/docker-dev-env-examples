@@ -1,15 +1,15 @@
-Apache / PHP docker image for development environment
-=====================================================
+Nginx / PHP docker image for development environment
+====================================================
 
 ## Configuration
 
-Apache2, php5, Xdebug, composer, phpunit, phing
+Nginx, php5, Xdebug, composer, phpunit, phing
 
-Apache serve a phpinfo() page. To test it and obtain information about the configuration:
+Nginx serve a phpinfo() page. To test it and obtain information about the configuration:
 ```
-docker run -d -p 80:80 -p 443:443 alexisno/apache-php
+docker run -d -p 80:80 -p 443:443 alexisno/nginx-php
 ```
-* `docker run ... alexisno/apache-php` Run Apache in a new container
+* `docker run ... alexisno/nginx-php` Run Nginx and PHP-FPM in a new container
 * `-d` Detached mode: run container in the background
 * `-p 80:80 -p 443:443` Publish the container's ports 80 and 443 on the host so you can connect to the server
 
@@ -32,7 +32,7 @@ This image should be used as a basic image for any project.
 
 Run your new image with a command similar to this:
 ```
-docker run -d -p 80:80 -p 443:443 -v /path/to/your/project/sources:/var/www/project-name -v /path/to/project/data/apache/logs:/var/log/apache2 your-image-tag
+docker run -d -p 80:80 -p 443:443 -v /path/to/your/project/sources:/var/www/project-root -v /path/to/your/project/data/logs:/var/log/nginx your-image-tag
 ```
 
 
@@ -45,21 +45,4 @@ Usage in child Dockerfile:
 RUN /gencert.sh <domain>
 ```
 
-VirtualHost configuration:
-```
-<VirtualHost *:443>
-    SSLEngine on
-    SSLCertificateFile /etc/ssl/certs/<domain>.crt
-    SSLCertificateKeyFile /etc/ssl/private/<domain>.key
-    # SSL Protocol Adjustments:
-    BrowserMatch "MSIE [2-6]" \
-                  nokeepalive ssl-unclean-shutdown \
-                  downgrade-1.0 force-response-1.0
-    # MSIE 7 and newer should be able to use keepalive
-    BrowserMatch "MSIE [17-9]" ssl-unclean-shutdown
-
-    # Complete with your configuration
-    ...
-</VirtualHost>
-```
 Replace `<domain>` with your development hostname.
