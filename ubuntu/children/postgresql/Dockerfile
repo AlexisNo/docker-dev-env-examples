@@ -1,5 +1,5 @@
 # Pull base image
-FROM alexisno/ubuntu-base
+FROM alexisno/ubuntu-dev
 
 # Add the PostgreSQL PGP key to verify their Debian packages.
 # It should be the same key as https://www.postgresql.org/media/keys/ACCC4CF8.asc

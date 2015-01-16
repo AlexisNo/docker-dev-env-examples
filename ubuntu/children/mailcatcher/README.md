@@ -13,4 +13,4 @@ docker run -d -p 1080:1080 alexisno/mailcatcher
 
 Watch the catched e-mails at http://localhost:1080
 
-Use it linked to a [`alexisno/apache-php`](https://github.com/AlexisNo/dev-dockerfiles/tree/master/ubuntu-base/children/apache-php) or a [`alexisno/nginx-php`](https://github.com/AlexisNo/dev-dockerfiles/tree/master/ubuntu-base/children/nginx/children/nginx-php) container.
+Use it linked to a [`alexisno/apache-php`](https://github.com/AlexisNo/dev-dockerfiles/tree/master/ubuntu/children/apache-php) or a [`alexisno/nginx-php`](https://github.com/AlexisNo/dev-dockerfiles/tree/master/ubuntu/children/nginx/children/nginx-php) container.

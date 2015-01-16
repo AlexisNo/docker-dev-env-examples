@@ -17,8 +17,8 @@ Open your brower at http://localhost/ and https://localhost/
 
 Composer, phpunit and phing are available globally.
 
-PHP is configured to send mail via a [`alexisno/mailcatcher`](https://github.com/AlexisNo/dev-dockerfiles/tree/master/ubuntu-base/children/mailcatcher) container.
-Launch a [`alexisno/mailcatcher`](https://github.com/AlexisNo/dev-dockerfiles/tree/master/ubuntu-base/children/mailcatcher) container and use `--link mailcatcher:my-mailcatcher-container`.
+PHP is configured to send mail via a [`alexisno/mailcatcher`](https://github.com/AlexisNo/dev-dockerfiles/tree/master/ubuntu/children/mailcatcher) container.
+Launch a [`alexisno/mailcatcher`](https://github.com/AlexisNo/dev-dockerfiles/tree/master/ubuntu/children/mailcatcher) container and use `--link mailcatcher:my-mailcatcher-container`.
 
 Xdebug is configurated to accept any connection. Just send the appropriate request parameters.
 

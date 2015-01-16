@@ -1,5 +1,5 @@
 # Pull base image
-FROM alexisno/nginx
+FROM alexisno/nginx-dev
 
 # Install basic packages
 RUN apt-get update &&\

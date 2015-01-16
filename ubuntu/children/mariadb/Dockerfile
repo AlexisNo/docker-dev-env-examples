@@ -1,5 +1,5 @@
 # Pull base image
-FROM alexisno/ubuntu-base
+FROM alexisno/ubuntu-dev
 
 # Install mariadb server
 RUN apt-get update &&\
