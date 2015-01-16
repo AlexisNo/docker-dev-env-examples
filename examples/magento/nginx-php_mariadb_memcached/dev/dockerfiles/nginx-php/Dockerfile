@@ -30,8 +30,8 @@ RUN wget https://raw.githubusercontent.com/netz98/n98-magerun/master/n98-magerun
 COPY /etc/n98-magerun.yaml /etc/n98-magerun.yaml
 
 # The run script install Magento if sources do not exist
-COPY /var/init/run.sh /var/init/run.sh
 COPY /var/init/local.xml /var/init/local.xml
+COPY /var/init/run.sh /var/init/run.sh
 RUN chmod +x /var/init/run.sh
 
 CMD ["bash", "/var/init/run.sh"]

@@ -1,0 +1,21 @@
+web:
+  build: ./dockerfiles/nginx-php/
+  links:
+   - db
+   - mailcatcher
+  ports:
+   - "80:80"
+   - "443:443"
+  volumes:
+   - ../src:/var/www/symfony
+   - data/log/nginx:/var/log/nginx
+db:
+  image: alexisno/posgresql
+  ports:
+   - "3306:3306"
+  volumes:
+   - data/postgresql:?????????
+mailcatcher:
+  image: alexisno/mailcatcher
+  ports:
+   - "1080:1080"

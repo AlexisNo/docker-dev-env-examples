@@ -1,0 +1,11 @@
+web:
+  build: ./dockerfiles/nginx/
+  links:
+   - nodejs
+  ports:
+   - "80"
+  volumes:
+   - /../src:/var/www/myapp
+   - data/log/forever:/var/log/forever
+nodejs:
+  build: ./dockerfiles/nodejs/

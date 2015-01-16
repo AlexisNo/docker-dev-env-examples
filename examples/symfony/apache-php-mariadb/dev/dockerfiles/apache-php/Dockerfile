@@ -11,6 +11,11 @@ RUN a2enmod rewrite
 # Install self signed certificates
 RUN /gencert.sh $SYMFONY_ADDRESS
 
+# Install symfony installer
+RUN curl -LsS http://symfony.com/installer > symfony.phar
+RUN sudo mv symfony.phar /usr/local/bin/symfony
+RUN chmod a+x /usr/local/bin/symfony
+
 # Add and activate virtualhost
 COPY /etc/apache2/sites-available/symfony.conf /etc/apache2/sites-available/symfony.conf
 RUN sed -i -e "s/{{SYMFONY_ADDRESS}}/$SYMFONY_ADDRESS/" /etc/apache2/sites-available/symfony.conf

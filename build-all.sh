@@ -19,7 +19,7 @@ function build()
                 echo "# Build docker image \"$IMAGENAME\""
                 echo "#                                             #"
                 echo "###############################################"
-                CMD="docker build -t alexisno/$IMAGENAME $1"
+                CMD="docker build -t alexisno/$IMAGENAME-dev $1"
                 echo ">> $CMD"
 
                 ${CMD}
@@ -30,13 +30,13 @@ function build()
                     exit ${RETCODE}
                 fi
 
-                docker push alexisno/${IMAGENAME}
-                RET_CODE=$?
-                if [ ${RETCODE} != 0 ];
-                then
-                    printf "Error : [$RETCODE] when pushing image '$IMAGENAME'"
-                    exit ${RETCODE}
-                fi
+                #docker push alexisno/${IMAGENAME}
+                #RET_CODE=$?
+                #if [ ${RETCODE} != 0 ];
+                #then
+                #    printf "Error : [$RETCODE] when pushing image '$IMAGENAME'"
+                #    exit ${RETCODE}
+                #fi
             fi
         fi
     done
@@ -51,4 +51,4 @@ function build()
         done
     fi
 }
-build "$DIR/ubuntu-base"
+build "$DIR/ubuntu"

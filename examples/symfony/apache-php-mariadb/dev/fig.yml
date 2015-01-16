@@ -1,24 +1,21 @@
 web:
-  build: ./dockerfiles/nginx-php/
+  build: ./dockerfiles/apache-php/
   links:
    - db
-   - memcached
    - mailcatcher
   ports:
-   - "80"
-   - "443"
+   - "80:80"
+   - "443:443"
   volumes:
-   - ../src:/var/www/magento
+   - ../src:/var/www/symfony
    - data/log/apache2:/var/log/apache2
 db:
   image: alexisno/mariadb
   ports:
-   - "3306"
+   - "3306:3306"
   volumes:
    - data/mysql:/var/lib/mysql
-memcached:
-  image: alexisno/memcached
 mailcatcher:
   image: alexisno/mailcatcher
   ports:
-   - "1080"
+   - "1080:1080"

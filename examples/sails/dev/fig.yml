@@ -1,0 +1,23 @@
+web:
+  build: ./dockerfiles/nginx/
+  links:
+   - nodejs
+   - db
+   - mailcatcher
+  ports:
+   - "80"
+  volumes:
+   - /../src:/var/www/my-sails-app
+   - data/log/forever:/var/log/forever
+nodejs:
+  build: ./dockerfiles/nodejs/
+db:
+  image: alexisno/mongodb
+  ports:
+   - "27017"
+  volumes:
+   - data/mongodb:???????
+mailcatcher:
+  image: alexisno/mailcatcher
+  ports:
+   - "1080"
