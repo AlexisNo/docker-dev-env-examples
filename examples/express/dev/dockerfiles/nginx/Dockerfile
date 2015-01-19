@@ -1,4 +1,4 @@
-FROM alexisno/nginx
+FROM alexisno/nginx-dev
 
 ENV EXPRESS_ADDRESS=express.local
 

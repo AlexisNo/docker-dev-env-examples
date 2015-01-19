@@ -10,12 +10,12 @@ web:
    - ../src:/var/www/symfony
    - data/log/apache2:/var/log/apache2
 db:
-  image: alexisno/mariadb
+  image: alexisno/mariadb-dev
   ports:
    - "3306:3306"
   volumes:
    - data/mysql:/var/lib/mysql
 mailcatcher:
-  image: alexisno/mailcatcher
+  image: alexisno/mailcatcher-dev
   ports:
    - "1080:1080"

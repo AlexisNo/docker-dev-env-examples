@@ -1,4 +1,4 @@
-FROM alexisno/nginx-php
+FROM alexisno/nginx-php-dev
 
 ENV SYMFONY_ADDRESS=symfony.local
 

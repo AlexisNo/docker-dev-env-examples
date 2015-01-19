@@ -1,4 +1,4 @@
-FROM alexisno/apache-php
+FROM alexisno/apache-php-dev
 
 ENV STORE_ADDRESS=www.magento.local
 ENV ADMIN_ADDRESS=admin.magento.local

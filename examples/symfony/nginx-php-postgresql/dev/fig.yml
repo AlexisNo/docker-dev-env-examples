@@ -10,12 +10,12 @@ web:
    - ../src:/var/www/symfony
    - data/log/nginx:/var/log/nginx
 db:
-  image: alexisno/posgresql
+  image: alexisno/posgresql-dev
   ports:
    - "3306:3306"
   volumes:
    - data/postgresql:?????????
 mailcatcher:
-  image: alexisno/mailcatcher
+  image: alexisno/mailcatcher-dev
   ports:
    - "1080:1080"

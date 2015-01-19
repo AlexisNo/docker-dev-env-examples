@@ -1,4 +1,4 @@
-FROM alexisno/apache-php
+FROM alexisno/apache-php-dev
 
 ENV SYMFONY_ADDRESS=symfony.local
 

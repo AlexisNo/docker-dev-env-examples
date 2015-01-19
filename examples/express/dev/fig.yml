@@ -3,7 +3,7 @@ web:
   links:
    - nodejs
   ports:
-   - "80"
+   - "80:80"
   volumes:
    - /../src:/var/www/myapp
    - data/log/forever:/var/log/forever

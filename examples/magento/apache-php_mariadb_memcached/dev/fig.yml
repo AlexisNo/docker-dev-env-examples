@@ -5,20 +5,20 @@ web:
    - memcached
    - mailcatcher
   ports:
-   - "80"
-   - "443"
+   - "80:80"
+   - "443:443"
   volumes:
    - ../src:/var/www/magento
    - data/log/apache2:/var/log/apache2
 db:
-  image: alexisno/mariadb
+  image: alexisno/mariadb-dev
   ports:
-   - "3306"
+   - "3306:3306"
   volumes:
    - data/mysql:/var/lib/mysql
 memcached:
-  image: alexisno/memcached
+  image: alexisno/memcached-dev
 mailcatcher:
-  image: alexisno/mailcatcher
+  image: alexisno/mailcatcher-dev
   ports:
-   - "1080"
+   - "1080:1080"

@@ -1,4 +1,4 @@
-FROM alexisno/nginx-php
+FROM alexisno/nginx-php-dev
 
 ENV STORE_ADDRESS=www.magento.local
 ENV ADMIN_ADDRESS=admin.magento.local

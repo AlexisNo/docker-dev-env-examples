@@ -12,7 +12,7 @@ if [ ! -d /var/www/magento/app ]; then
                                             --dbName="magento"\
                                             --installSampleData=no\
                                             --useDefaultConfigParams=yes\
-                                            --magentoVersionByName="magento-ce-1.9.0.1"\
+                                            --magentoVersionByName="magento-ce-1.9.1.0"\
                                             --installationFolder="."\
                                             --baseUrl=$ADMIN_ADDRESS
     sudo -H -u dev cp /var/init/local.xml /var/www/magento/app/etc/local.xml

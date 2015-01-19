@@ -5,19 +5,19 @@ web:
    - db
    - mailcatcher
   ports:
-   - "80"
+   - "80:80"
   volumes:
    - /../src:/var/www/my-sails-app
    - data/log/forever:/var/log/forever
 nodejs:
   build: ./dockerfiles/nodejs/
 db:
-  image: alexisno/mongodb
+  image: alexisno/mongodb-dev
   ports:
-   - "27017"
+   - "27017:27017"
   volumes:
    - data/mongodb:???????
 mailcatcher:
-  image: alexisno/mailcatcher
+  image: alexisno/mailcatcher-dev
   ports:
-   - "1080"
+   - "1080:1080"

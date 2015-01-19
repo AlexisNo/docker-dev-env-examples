@@ -1,4 +1,4 @@
-FROM alexisno/nodejs
+FROM alexisno/nodejs-dev
 
 # Install express generator
 RUN npm install -g express-generator
