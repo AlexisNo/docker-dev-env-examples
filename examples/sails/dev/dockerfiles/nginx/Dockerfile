@@ -1,4 +1,4 @@
-FROM alexisno/nginx
+FROM alexisno/nginx-dev
 
 ENV SAILS_ADDRESS=sails.local
 

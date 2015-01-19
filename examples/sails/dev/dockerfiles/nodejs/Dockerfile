@@ -1,4 +1,4 @@
-FROM alexisno/nodejs
+FROM alexisno/nodejs-dev
 
 # Install sails globally
 RUN npm install -g sails
