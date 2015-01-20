@@ -1,20 +1,20 @@
 #!/bin/bash
 
-# Retrieve current directory
-DIR="$( cd "$( dirname "$0" )" && pwd )"
+PATH="~/.node/bin:$PATH"
 
 # Install sample app
-if [ ! -e /var/www/my-sails-app/app.js ]; then
+if [ ! -e /var/www/sails-app/app.js ]; then
     echo "Generate a Sails.js application"
     cd /var/www
-    sails new my-sails-app
-    cd /var/www/my-sails-app
+    sails new sails-app
+    cd /var/www/sails-app
     sails generate api demo
-    sed -i "s/\/\/ migrate: 'alter'/migrate:'alter'/g" /var/www/my-sails-app/config/models.js
+    sed -i "s/\/\/ migrate: 'alter'/migrate:'alter'/g" /var/www/sails-app/config/models.js
 else
     echo "An app is already installed"
 fi
 
-node sh -c 'PATH=$PATH:~/.node/bin &&
-                       cd /var/www/my-sails-app &&
-                       FOREVER_ROOT=/var/log/forever forever start app.js'
+cp /var/init/.foreverignore /var/www/sails-app/.foreverignore
+mkdir /var/www/sails-app/log
+cd /var/www/sails-app
+forever -w -o log/out.log -e log/err.log app.js

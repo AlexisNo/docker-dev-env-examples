@@ -2,15 +2,15 @@ web:
   build: ./dockerfiles/nginx/
   links:
    - nodejs
-   - db
-   - mailcatcher
   ports:
    - "80:80"
-  volumes:
-   - /../src:/var/www/my-sails-app
-   - data/log/forever:/var/log/forever
 nodejs:
   build: ./dockerfiles/nodejs/
+  links:
+   - db
+   - mailcatcher
+  volumes:
+   - ../src:/var/www/sails-app
 db:
   image: alexisno/mongodb-dev
   ports:
