@@ -9,8 +9,8 @@ Globally installed npm packages:
 
 Basic usage:
 ```
-docker run -d alexisno/nodejs
+docker run -d alexisno/nodejs-dev
 ```
-* `docker run ... alexisno/nodejs` create a new container based on the image
+* `docker run ... alexisno/nodejs-dev` create a new container based on the image
 * `-d` Detached mode: Run container in the background
 

@@ -12,7 +12,7 @@ RUN echo "<?php echo phpinfo();" >> /var/www/html/index.php && rm /var/www/html/
 # Setup PHP timezone
 RUN echo date.timezone=Europe/Paris >> /etc/php5/apache2/conf.d/01-timezone.ini
 
-# Setup PHP to use the alexisno/mailcatcher image to send mails
+# Setup PHP to use the alexisno/mailcatcher-dev image to send mails
 # The name of the linked container must be "mailcatcher"
 RUN gem install mailcatcher --no-rdoc --no-ri &&\
     sed -i -e "s/.*sendmail_path =.*/sendmail_path = \/usr\/bin\/env catchmail --smtp-ip mailcatcher -f address@example\.com/" /etc/php5/apache2/php.ini &&\

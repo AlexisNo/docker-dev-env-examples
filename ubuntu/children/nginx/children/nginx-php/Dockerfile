@@ -12,7 +12,7 @@ RUN mkdir -p /var/www/html/ && echo "<?php echo phpinfo();" >> /var/www/html/ind
 # Setup PHP timezone
 RUN echo date.timezone=Europe/Paris >> /etc/php5/fpm/conf.d/01-timezone.ini
 
-# Setup PHP to use the alexisno/mailcatcher image to send mails
+# Setup PHP to use the alexisno/mailcatcher-dev image to send mails
 # The name of the linked container must be "mailcatcher"
 # Display all errors
 # Configure Xdebug

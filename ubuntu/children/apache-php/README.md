@@ -7,9 +7,9 @@ Apache2, php5, Xdebug, composer, phpunit, phing
 
 Apache serve a phpinfo() page. To test it and obtain information about the configuration:
 ```
-docker run -d -p 80:80 -p 443:443 alexisno/apache-php
+docker run -d -p 80:80 -p 443:443 alexisno/apache-php-dev
 ```
-* `docker run ... alexisno/apache-php` Run Apache in a new container
+* `docker run ... alexisno/apache-php-dev` Run Apache in a new container
 * `-d` Detached mode: run container in the background
 * `-p 80:80 -p 443:443` Publish the container's ports 80 and 443 on the host so you can connect to the server
 
@@ -17,8 +17,8 @@ Open your brower at http://localhost/ and https://localhost/
 
 Composer, phpunit and phing are available globally.
 
-PHP is configured to send mail via a [`alexisno/mailcatcher`](https://github.com/AlexisNo/dev-dockerfiles/tree/master/ubuntu/children/mailcatcher) container.
-Launch a [`alexisno/mailcatcher`](https://github.com/AlexisNo/dev-dockerfiles/tree/master/ubuntu/children/mailcatcher) container and use `--link mailcatcher:my-mailcatcher-container`.
+PHP is configured to send mail via a [`alexisno/mailcatcher-dev`](https://github.com/AlexisNo/dev-dockerfiles/tree/master/ubuntu/children/mailcatcher) container.
+Launch a [`alexisno/mailcatcher-dev`](https://github.com/AlexisNo/dev-dockerfiles/tree/master/ubuntu/children/mailcatcher) container and use `--link mailcatcher:my-mailcatcher-container`.
 
 Xdebug is configurated to accept any connection. Just send the appropriate request parameters.
 
