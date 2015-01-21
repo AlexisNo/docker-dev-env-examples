@@ -16,7 +16,7 @@ db:
   ports:
    - "27017:27017"
   volumes:
-   - data/mongodb:/var/lib/mongodb
+   - data/mongodb:/data/db
 mailcatcher:
   image: alexisno/mailcatcher-dev
   ports:
