@@ -22,6 +22,8 @@ RUN sed -i -e "s/{{SYMFONY_ADDRESS}}/$SYMFONY_ADDRESS/" /etc/apache2/sites-avail
 RUN a2ensite symfony
 
 # Install Symfony if sources do not exist
-COPY /etc/my_init.d/20_install-symfony.sh /etc/my_init.d/20_install-symfony.sh
+COPY /var/init/run.sh /var/init/run.sh
 COPY /var/init/parameters.yml /var/init/parameters.yml
-RUN chmod +x /etc/my_init.d/20_install-symfony.sh
+RUN chmod +x /var/init/run.sh
+
+CMD ["bash", "/var/init/run.sh"]

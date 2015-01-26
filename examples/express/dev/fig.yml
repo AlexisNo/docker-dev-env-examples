@@ -4,8 +4,7 @@ web:
    - nodejs
   ports:
    - "80:80"
-  volumes:
-   - /../src:/var/www/myapp
-   - data/log/forever:/var/log/forever
 nodejs:
   build: ./dockerfiles/nodejs/
+  volumes:
+   - ../src:/var/www/myapp

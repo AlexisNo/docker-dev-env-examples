@@ -3,7 +3,7 @@
 # Install symfony
 if [ ! -d /var/www/symfony/web ]; then
     # Install symfony rest edition
-    sudo -H -u dev composer create-project gimler/symfony-rest-edition --stability=dev /var/www/symfony
+    sudo -H -u dev composer create-project symfony/framework-standard-edition /var/www/symfony
     sudo -H -u dev cp /var/init/parameters.yml /var/www/symfony/app/config/parameters.yml
 
     # Allow access to app_dev.php and config.php from host
