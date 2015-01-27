@@ -14,7 +14,7 @@ db:
   ports:
    - "3306:3306"
   volumes:
-   - data/postgresql:?????????
+   - data/postgresql:/var/lib/postgresql
 mailcatcher:
   image: alexisno/mailcatcher-dev
   ports:

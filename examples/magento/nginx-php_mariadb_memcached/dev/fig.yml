@@ -9,7 +9,7 @@ web:
    - "443:443"
   volumes:
    - ../src:/var/www/magento
-   - data/log/apache2:/var/log/apache2
+   - data/log/nginx:/var/log/nginx
 db:
   image: alexisno/mariadb-dev
   ports:
