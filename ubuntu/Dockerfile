@@ -21,11 +21,15 @@ RUN sed -i 's/ZSH_THEME="robbyrussell"/ZSH_THEME="anoio-docker"/g' /root/.zshrc 
 COPY /root/.gitconfig /root/.gitconfig
 
 # Create dev user
-RUN useradd dev -m -d /home/dev/ -s /bin/zsh && mkdir -p /var/www && chown -R dev:dev /var/www
+RUN useradd dev -m -d /home/dev/ -s /bin/zsh -G sudo && passwd -d -u dev
+
+# Add a script to modify the dev user UID / GID
+COPY /usr/bin/change-dev-id /usr/bin/change-dev-id
+RUN chmod +x /usr/bin/change-dev-id
 
 # Configure zsh and git for user dev
 USER dev
-RUN git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh &&\
+RUN git clone --depth=1 https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh &&\
     cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc &&\
     sed -i 's/ZSH_THEME="robbyrussell"/ZSH_THEME="anoio-docker"/g' /home/dev/.zshrc &&\
     sed -i 's/# DISABLE_AUTO_UPDATE=true/DISABLE_AUTO_UPDATE=true/g' /home/dev/.zshrc &&\

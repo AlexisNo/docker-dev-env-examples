@@ -14,4 +14,14 @@ This image is designed for development environments
  * curl
  * wget
  * telnet
- * user `dev`
+
+A `dev` user is created to perform non-root operations.
+The `dev` user does not have password and is sudoer.
+
+To change the `dev` user UID/GID, use the `change-dev-ids` command.
+```
+change-dev-ids <NEWUID> [<NEWGID>]
+```
+If `NEWGID` is not specified, it will have the same value than `NEWUID`.
+
+This command is useful to set the same permissions on files shared via a volume with the user on the host machine.
