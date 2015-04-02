@@ -1,0 +1,23 @@
+web:
+  build: ./docker-compose/nginx/
+  links:
+   - nodejs
+  ports:
+   - "80:80"
+nodejs:
+  build: ./docker-compose/nodejs/
+  links:
+   - db
+   - mailcatcher
+  volumes:
+   - ./src:/var/www/sails-app
+db:
+  image: alexisno/mongodb-dev
+  ports:
+   - "27017:27017"
+  volumes:
+   - ./docker-compose/data/mongodb:/data/db
+mailcatcher:
+  image: alexisno/mailcatcher-dev
+  ports:
+   - "1080:1080"

@@ -1,0 +1,24 @@
+web:
+  build: ./docker-compose/nginx-php/
+  links:
+   - db
+   - memcached
+   - mailcatcher
+  ports:
+   - "80:80"
+   - "443:443"
+  volumes:
+   - ./src:/var/www/magento
+   - ./docker-compose/data/log/nginx:/var/log/nginx
+db:
+  image: alexisno/mariadb-dev
+  ports:
+   - "3306:3306"
+  volumes:
+   - ./docker-compose/data/mysql:/var/lib/mysql
+memcached:
+  image: alexisno/memcached-dev
+mailcatcher:
+  image: alexisno/mailcatcher-dev
+  ports:
+   - "1080:1080"

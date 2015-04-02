@@ -1,4 +1,4 @@
-dev/data/*
+docker-compose/data/*
+!docker-compose/data/README.md
 src/*
-!dev/data/README.md
 !src/README.md

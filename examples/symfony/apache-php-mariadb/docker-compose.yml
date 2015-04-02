@@ -1,0 +1,21 @@
+web:
+  build: ./docker-compose/apache-php/
+  links:
+   - db
+   - mailcatcher
+  ports:
+   - "80:80"
+   - "443:443"
+  volumes:
+   - ./src:/var/www/symfony
+   - ./docker-compose/data/log/apache2:/var/log/apache2
+db:
+  image: alexisno/mariadb-dev
+  ports:
+   - "3306:3306"
+  volumes:
+   - ./docker-compose/data/mysql:/var/lib/mysql
+mailcatcher:
+  image: alexisno/mailcatcher-dev
+  ports:
+   - "1080:1080"

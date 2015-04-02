@@ -46,23 +46,22 @@ USER root
 
 # Add script to generate self signed certificates
 # Script from https://gist.github.com/bradland/1690807
-COPY /gencert.sh /gencert.sh
-RUN chmod +x /gencert.sh
+COPY /usr/bin/gencert /usr/bin/gencert
+RUN chmod +x /usr/bin/gencert
 
 # Enable SSL and setup a testing SSL virtualhost
 COPY /etc/apache2/sites-available/000-default-ssl.conf /etc/apache2/sites-available/000-default-ssl.conf
 RUN a2enmod ssl &&\
-    /gencert.sh localhost &&\
+    gencert localhost &&\
     a2ensite 000-default-ssl
+
+WORKDIR /var/www
 
 # Expose http and https ports
 EXPOSE 80 443
 
-ENV APACHE_LOCK_DIR  /var/lock/apache2
-ENV APACHE_PID_FILE  /var/run/apache2.pid
-ENV APACHE_RUN_USER  www-data
-ENV APACHE_RUN_GROUP www-data
-ENV APACHE_LOG_DIR   /var/log/apache2
-ENV APACHE_RUN_DIR   /var/run/apache2
+# Create the default command for the container
+COPY /usr/bin/start-service /usr/bin/start-service
+RUN chmod +x /usr/bin/start-service
 
-CMD ["/usr/sbin/apache2", "-DFOREGROUND"]
+CMD ["start-service"]

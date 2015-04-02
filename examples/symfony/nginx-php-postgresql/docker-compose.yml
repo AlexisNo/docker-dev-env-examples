@@ -1,0 +1,21 @@
+web:
+  build: ./docker-compose/nginx-php/
+  links:
+   - db
+   - mailcatcher
+  ports:
+   - "80:80"
+   - "443:443"
+  volumes:
+   - ./src:/var/www/symfony
+   - ./docker-compose/data/log/nginx:/var/log/nginx
+db:
+  image: alexisno/postgresql-dev
+  ports:
+   - "3306:3306"
+  volumes:
+   - ./docker-compose/data/postgresql:/var/lib/postgresql
+mailcatcher:
+  image: alexisno/mailcatcher-dev
+  ports:
+   - "1080:1080"

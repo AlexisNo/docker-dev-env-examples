@@ -37,3 +37,5 @@ RUN git clone --depth=1 https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-z
 COPY /home/dev/.oh-my-zsh/themes/anoio-docker.zsh-theme /home/dev/.oh-my-zsh/themes/anoio-docker.zsh-theme
 USER root
 RUN cp /root/.gitconfig /home/dev/.gitconfig && chown dev:dev /home/dev/.gitconfig
+
+CMD ["/bin/zsh"]

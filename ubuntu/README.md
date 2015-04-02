@@ -18,9 +18,9 @@ This image is designed for development environments
 A `dev` user is created to perform non-root operations.
 The `dev` user does not have password and is sudoer.
 
-To change the `dev` user UID/GID, use the `change-dev-ids` command.
+To change the `dev` user UID/GID, use the `change-dev-id` command.
 ```
-change-dev-ids <NEWUID> [<NEWGID>]
+change-dev-id <NEWUID> [<NEWGID>]
 ```
 If `NEWGID` is not specified, it will have the same value than `NEWUID`.
 

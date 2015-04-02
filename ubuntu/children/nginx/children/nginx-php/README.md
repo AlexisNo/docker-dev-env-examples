@@ -38,11 +38,11 @@ docker run -d -p 80:80 -p 443:443 -v /path/to/your/project/sources:/var/www/proj
 
 ## Self signed certificate
 
-The image comes with a `/gencert.sh` script to generate self signed certificates.
+The image comes with a `gencert` command to generate self signed certificates.
 
 Usage in child Dockerfile:
 ```
-RUN /gencert.sh <domain>
+RUN gencert <domain>
 ```
 
 Replace `<domain>` with your development hostname.
