@@ -16,4 +16,8 @@ if [ ! -d /var/lib/mysql/mysql ]; then
     service mysql stop
 fi
 
+# Prevent errors when the server is not correctly shutted down
+myisamchk -q -r /var/lib/mysql/mysql/proc
+
+# Start MariaDB
 mysqld
