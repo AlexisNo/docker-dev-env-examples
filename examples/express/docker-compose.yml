@@ -4,6 +4,7 @@ web:
    - nodejs
   ports:
    - "80:80"
+   - "443:443"
 nodejs:
   build: ./docker-compose/nodejs/
   volumes:

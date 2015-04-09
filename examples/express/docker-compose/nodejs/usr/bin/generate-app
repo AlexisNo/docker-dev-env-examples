@@ -1,0 +1,9 @@
+#!/bin/bash
+
+PATH="~/.node/bin:$PATH"
+
+# Install a sample app
+echo "Generate an Express.js application"
+cd /var/www/ && express -f myapp
+cd /var/www/myapp && npm install
+cp /home/dev/resources/.foreverignore /var/www/myapp/.foreverignore

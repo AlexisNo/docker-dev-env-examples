@@ -2,16 +2,21 @@
 
 PATH="~/.node/bin:$PATH"
 
-# Install a sample app
-if [ ! -e /var/www/myapp/app.js ]; then
-    echo "Generate an Express.js application"
-    cd /var/www/ && express -f myapp
-    cd /var/www/myapp && npm install
-else
-    echo "Express.js is already installed"
+if [ ! -d "/var/www/myapp/log" ];
+then
+    mkdir /var/www/myapp/log
 fi
 
-cp /home/dev/resources/.foreverignore /var/www/myapp/.foreverignore
-mkdir /var/www/myapp/log
 cd /var/www/myapp
 forever -w -o log/out.log -e log/err.log ./bin/www
+
+RETCODE=$?
+
+if [ ${RETCODE} == 255 ];
+then
+    printf "Error : Unable to launch the container. Do you have the sources of your application in the /src directory?\n"
+    printf "Use this command to generate a sample application:\n"
+    printf "    docker-compose run nodejs generate-app\n"
+fi
+
+exit ${RETCODE}

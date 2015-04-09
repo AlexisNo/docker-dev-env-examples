@@ -11,10 +11,12 @@ RUN npm install -g express-generator
 # Copy useful resources for the default command
 COPY /home/dev/resources/.foreverignore /home/dev/resources/.foreverignore
 
-# Create the default command for the container
+# Create a command to generate a sample app
+# and the default command to start the container
 USER root
+COPY /usr/bin/generate-app /usr/bin/generate-app
 COPY /usr/bin/start-service /usr/bin/start-service
-RUN chmod +x /usr/bin/start-service
+RUN chmod +x /usr/bin/generate-app /usr/bin/start-service
 USER dev
 
 # Expose express generator default port
