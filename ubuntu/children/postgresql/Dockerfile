@@ -4,9 +4,7 @@ FROM alexisno/ubuntu-dev
 # Add the PostgreSQL PGP key to verify their Debian packages
 # Add PostgreSQL's repository
 # Install ``python-software-properties``, ``software-properties-common`` and PostgreSQL 9.3
-RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys B97B0AFCAA1A47F044F244A07FCC7D46ACCC4CF8 &&\
-    echo "deb http://apt.postgresql.org/pub/repos/apt/ precise-pgdg main" > /etc/apt/sources.list.d/pgdg.list &&\
-    apt-get update &&\
+RUN apt-get update &&\
     apt-get -y install python-software-properties software-properties-common postgresql-9.3 postgresql-client-9.3 postgresql-contrib-9.3 &&\
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
