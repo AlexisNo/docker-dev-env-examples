@@ -11,7 +11,7 @@ then
 elif [ $# -ne 1 ]
 then
     echo "Usage: change-dev-id NEWUID [NEWGID]"
-    echo "If NEWGID is not provided, it's value will be the same that NEWUID"
+    echo "If NEWGID is not provided, its value will be the same as NEWUID"
     exit 1
 fi
 
