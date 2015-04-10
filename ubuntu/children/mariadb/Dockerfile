@@ -17,8 +17,8 @@ RUN service mysql start &&\
 # Create the default command for the container
 # It allows to rebuild a database if /var/lib/mysql is empty
 # Useful when using a volume with "docker run -v /path/on/host:/var/lib/mysql"
-COPY /usr/bin/start-service /usr/bin/start-service
-RUN chmod +x /usr/bin/start-service
+COPY /usr/local/bin/start-service /usr/local/bin/start-service
+RUN chmod +x /usr/local/bin/start-service
 
 # Define mountable directories
 VOLUME ["/var/lib/mysql"]

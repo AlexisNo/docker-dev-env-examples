@@ -1,7 +1,7 @@
 FROM alexisno/apache-php-dev
 
 # Uncomment the following lines and enter the host user UID if necessary
-RUN change-dev-id 1002
+#RUN change-dev-id 1002
 
 ENV STORE_ADDRESS=www.magento.local
 ENV ADMIN_ADDRESS=admin.magento.local
@@ -34,9 +34,9 @@ COPY /etc/n98-magerun.yaml /etc/n98-magerun.yaml
 
 # Create a command to generate a sample app
 # and the default command to start the container
-COPY /usr/bin/generate-app /usr/bin/generate-app
-COPY /usr/bin/start-service /usr/bin/start-service
-RUN chmod +x /usr/bin/generate-app  /usr/bin/start-service
+COPY /usr/local/bin/generate-app /usr/local/bin/generate-app
+COPY /usr/local/bin/start-service /usr/local/bin/start-service
+RUN chmod +x /usr/local/bin/generate-app  /usr/local/bin/start-service
 
 USER dev
 

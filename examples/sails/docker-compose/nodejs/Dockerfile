@@ -1,9 +1,9 @@
 FROM alexisno/nodejs-dev
 
 # Uncomment the following lines and enter the host user UID if necessary
-USER root
-RUN change-dev-id 1002
-USER dev
+#USER root
+#RUN change-dev-id 1002
+#USER dev
 
 # Install sails globally
 RUN npm install -g sails
@@ -13,8 +13,9 @@ COPY /home/dev/resources/.foreverignore /home/dev/resources/.foreverignore
 
 # Create the default command for the container
 USER root
-COPY /usr/bin/start-service /usr/bin/start-service
-RUN chmod +x /usr/bin/start-service
+COPY /usr/local/bin/generate-app /usr/local/bin/generate-app
+COPY /usr/local/bin/start-service /usr/local/bin/start-service
+RUN chmod +x /usr/local/bin/generate-app /usr/local/bin/start-service
 USER dev
 
 # Expose sails.js default port

@@ -8,8 +8,8 @@ RUN apt-get update &&\
 
 # Add script to generate self signed certificates
 # Script from https://gist.github.com/bradland/1690807
-COPY /usr/bin/gencert /usr/bin/gencert
-RUN chmod +x /usr/bin/gencert
+COPY /usr/local/bin/gencert /usr/local/bin/gencert
+RUN chmod +x /usr/local/bin/gencert
 
 # Enable SSL and setup a testing SSL virtualhost
 RUN gencert localhost

@@ -1,14 +1,12 @@
 #!/bin/bash
 
-PATH="~/.node/bin:$PATH"
-
-if [ ! -d "/var/www/myapp/log" ];
+if [ ! -d "/var/www/sails-app/log" ];
 then
-    mkdir /var/www/myapp/log
+    mkdir /var/www/sails-app/log
 fi
 
-cd /var/www/myapp
-forever -w -o log/out.log -e log/err.log ./bin/www
+cd /var/www/sails-app
+forever -w -o log/out.log -e log/err.log app.js
 
 RETCODE=$?
 

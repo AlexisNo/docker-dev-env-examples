@@ -1,7 +1,5 @@
 #!/bin/bash
 
-PATH="~/.node/bin:$PATH"
-
 # Install a sample app
 echo "Generate an Express.js application"
 cd /var/www/ && express -f myapp

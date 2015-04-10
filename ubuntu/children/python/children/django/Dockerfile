@@ -7,8 +7,8 @@ RUN pip install Django && mkdir -p /var/www
 WORKDIR /var/www
 
 # Create the default command for the container
-COPY /usr/bin/start-service /usr/bin/start-service
-RUN chmod +x /usr/bin/start-service
+COPY /usr/local/bin/start-service /usr/local/bin/start-service
+RUN chmod +x /usr/local/bin/start-service
 
 USER dev
 

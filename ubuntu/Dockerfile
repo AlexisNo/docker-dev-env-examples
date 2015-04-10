@@ -24,8 +24,8 @@ COPY /root/.gitconfig /root/.gitconfig
 RUN useradd dev -m -d /home/dev/ -s /bin/zsh -G sudo && passwd -d -u dev
 
 # Add a script to modify the dev user UID / GID
-COPY /usr/bin/change-dev-id /usr/bin/change-dev-id
-RUN chmod +x /usr/bin/change-dev-id
+COPY /usr/local/bin/change-dev-id /usr/local/bin/change-dev-id
+RUN chmod +x /usr/local/bin/change-dev-id
 
 # Configure zsh and git for user dev
 USER dev

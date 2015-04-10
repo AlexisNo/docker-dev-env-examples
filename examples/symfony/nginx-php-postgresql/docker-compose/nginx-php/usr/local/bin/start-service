@@ -1,0 +1,4 @@
+#!/bin/bash
+
+sudo service php5-fpm start
+sudo nginx

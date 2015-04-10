@@ -10,8 +10,7 @@ RUN add-apt-repository ppa:chris-lea/node.js &&\
 # Install npm packages globally with user dev
 USER dev
 RUN echo "prefix = ~/.node" >> ~/.npmrc &&\
-    echo "export PATH='/home/dev/.node/bin:$PATH'" >> ~/.bashrc &&\
-    echo "export PATH='/home/dev/.node/bin:$PATH'" >> ~/.zshrc &&\
     npm install -g forever bower grunt-cli node-inspector
+ENV PATH $PATH:/home/dev/.node/bin/
 
 WORKDIR /var/www

@@ -47,8 +47,8 @@ RUN ln -s /etc/nginx/sites-available/phpinfo.conf /etc/nginx/sites-enabled/phpin
     rm /etc/nginx/sites-enabled/default-ssl
 
 # Create the default command for the container
-COPY /usr/bin/start-service /usr/bin/start-service
-RUN chmod +x /usr/bin/start-service
+COPY /usr/local/bin/start-service /usr/local/bin/start-service
+RUN chmod +x /usr/local/bin/start-service
 
 CMD ["start-service"]
 
