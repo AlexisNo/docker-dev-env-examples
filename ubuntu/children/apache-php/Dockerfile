@@ -14,16 +14,14 @@ RUN echo date.timezone=Europe/Paris >> /etc/php5/apache2/conf.d/01-timezone.ini
 
 # Setup PHP to use the alexisno/mailcatcher-dev image to send mails
 # The name of the linked container must be "mailcatcher"
+# Display all errors
+# Configure Xdebug
 RUN gem install mailcatcher --no-rdoc --no-ri &&\
     sed -i -e "s/.*sendmail_path =.*/sendmail_path = \/usr\/bin\/env catchmail --smtp-ip mailcatcher -f address@example\.com/" /etc/php5/apache2/php.ini &&\
-    sed -i -e "s/.*sendmail_path =.*/sendmail_path = \/usr\/bin\/env catchmail --smtp-ip mailcatcher -f address@example\.com/" /etc/php5/cli/php.ini
-
-# Display all errors
-RUN echo "error_reporting = E_ALL\ndisplay_startup_errors = 1\ndisplay_errors = 1" >> /etc/php5/apache2/conf.d/01-errors.ini &&\
-    echo "error_reporting = E_ALL\ndisplay_startup_errors = 1\ndisplay_errors = 1" >> /etc/php5/cli/conf.d/01-errors.ini
-
-# Configure Xdebug
-RUN echo "xdebug.remote_enable=1" >> /etc/php5/apache2/conf.d/20-xdebug.ini &&\
+    sed -i -e "s/.*sendmail_path =.*/sendmail_path = \/usr\/bin\/env catchmail --smtp-ip mailcatcher -f address@example\.com/" /etc/php5/cli/php.ini &&\
+    echo "error_reporting = E_ALL\ndisplay_startup_errors = 1\ndisplay_errors = 1" >> /etc/php5/apache2/conf.d/01-errors.ini &&\
+    echo "error_reporting = E_ALL\ndisplay_startup_errors = 1\ndisplay_errors = 1" >> /etc/php5/cli/conf.d/01-errors.ini &&\
+    echo "xdebug.remote_enable=1" >> /etc/php5/fpm/conf.d/20-xdebug.ini &&\
     echo "xdebug.remote_connect_back=1" >> /etc/php5/apache2/conf.d/20-xdebug.ini &&\
     echo "xdebug.profiler_enable_trigger=1" >> /etc/php5/apache2/conf.d/20-xdebug.ini &&\
     echo "xdebug.max_nesting_level=250" >> /etc/php5/apache2/conf.d/20-xdebug.ini
@@ -40,8 +38,6 @@ RUN composer global require "phing/phing=2.*" &&\
     composer global require "phpunit/phpunit=*" &&\
     composer global require 'theseer/phpdox=@stable'
 ENV PATH $PATH:$COMPOSER_HOME/vendor/bin/
-
-# Operations made by the user "root"
 USER root
 
 # Add script to generate self signed certificates

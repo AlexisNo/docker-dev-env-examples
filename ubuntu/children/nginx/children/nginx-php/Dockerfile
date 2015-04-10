@@ -27,16 +27,18 @@ RUN gem install mailcatcher --no-rdoc --no-ri &&\
     echo "xdebug.max_nesting_level=250" >> /etc/php5/fpm/conf.d/20-xdebug.ini
 
 # Install Composer
-RUN curl -sS https://getcomposer.org/installer | php &&\
+RUN cd $HOME &&\
+    curl -sS https://getcomposer.org/installer | php &&\
     chmod +x composer.phar &&\
     mv composer.phar /usr/local/bin/composer
 
-# Install phing, PHPUnit and PHPDocx
-ENV COMPOSER_HOME /opt/composer
+# Install phing, PHPUnit and PHPDocx with user "dev"
+USER dev
 RUN composer global require "phing/phing=2.*" &&\
     composer global require "phpunit/phpunit=*" &&\
     composer global require 'theseer/phpdox=@stable'
-ENV PATH $PATH:/opt/composer/vendor/bin/
+ENV PATH $PATH:$COMPOSER_HOME/vendor/bin/
+USER root
 
 # Create default virtualhosts
 COPY /etc/nginx/sites-available/phpinfo.conf /etc/nginx/sites-available/phpinfo.conf
@@ -44,4 +46,9 @@ RUN ln -s /etc/nginx/sites-available/phpinfo.conf /etc/nginx/sites-enabled/phpin
     rm /etc/nginx/sites-enabled/default &&\
     rm /etc/nginx/sites-enabled/default-ssl
 
-CMD [ "sh", "-c", "service php5-fpm start && nginx"]
+# Create the default command for the container
+COPY /usr/bin/start-service /usr/bin/start-service
+RUN chmod +x /usr/bin/start-service
+
+CMD ["start-service"]
+

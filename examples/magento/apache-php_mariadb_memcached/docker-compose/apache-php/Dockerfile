@@ -32,13 +32,15 @@ RUN wget https://raw.githubusercontent.com/netz98/n98-magerun/master/n98-magerun
     chmod +x /usr/local/bin/n98-magerun
 COPY /etc/n98-magerun.yaml /etc/n98-magerun.yaml
 
-# Create the default command for the container
+# Create a command to generate a sample app
+# and the default command to start the container
+COPY /usr/bin/generate-app /usr/bin/generate-app
 COPY /usr/bin/start-service /usr/bin/start-service
-RUN chmod +x /usr/bin/start-service
+RUN chmod +x /usr/bin/generate-app  /usr/bin/start-service
 
 USER dev
 
-# Copy useful resources for the default command
+# Copy useful resources for the generate-app command
 COPY /home/dev/resources/local.xml /home/dev/resources/local.xml
 
 CMD ["start-service"]
