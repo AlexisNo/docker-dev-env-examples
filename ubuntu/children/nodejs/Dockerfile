@@ -7,6 +7,9 @@ RUN add-apt-repository ppa:chris-lea/node.js &&\
     apt-get -y install python-software-properties python g++ make nodejs &&\
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
+# Set ownership on /var/www
+RUN mkdir -p /var/www && chown dev:dev /var/www
+
 # Install npm packages globally with user dev
 USER dev
 RUN echo "prefix = ~/.node" >> ~/.npmrc &&\
@@ -14,3 +17,5 @@ RUN echo "prefix = ~/.node" >> ~/.npmrc &&\
 ENV PATH $PATH:/home/dev/.node/bin/
 
 WORKDIR /var/www
+
+CMD ["node"]

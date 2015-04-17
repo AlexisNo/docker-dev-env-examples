@@ -1,0 +1,11 @@
+web:
+  build: ./docker-compose/nginx/
+  links:
+   - python
+  ports:
+   - "80:80"
+   - "443:443"
+python:
+  build: ./docker-compose/python/
+  volumes:
+   - ./src:/var/www/myapp

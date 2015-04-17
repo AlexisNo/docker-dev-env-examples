@@ -1,0 +1,5 @@
+#!/bin/bash
+
+cd /var/www/ && django-admin startproject tmp
+mv tmp/* /var/www/myapp
+cd /var/www/myapp && python manage.py migrate && python manage.py createsuperuser

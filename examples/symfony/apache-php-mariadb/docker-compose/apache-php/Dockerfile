@@ -1,7 +1,7 @@
 FROM alexisno/apache-php-dev
 
 # Uncomment the following lines and enter the host user UID if necessary
-RUN change-dev-id 1002
+#RUN change-dev-id 1002
 
 ENV SYMFONY_ADDRESS=symfony.local
 
