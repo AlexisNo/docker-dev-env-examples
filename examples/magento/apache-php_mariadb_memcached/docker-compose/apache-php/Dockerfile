@@ -1,7 +1,9 @@
 FROM alexisno/apache-php-dev
 
+USER root
+
 # Uncomment the following lines and enter the host user UID if necessary
-#RUN change-dev-id 1002
+#RUN change-dev-id 1001
 
 ENV STORE_ADDRESS=www.magento.local
 ENV ADMIN_ADDRESS=admin.magento.local
@@ -27,7 +29,7 @@ RUN sed -i -e "s/{{STORE_ADDRESS}}/$STORE_ADDRESS/" /etc/apache2/sites-available
     a2ensite magento && a2enmod rewrite
 
 # Install magerun command line
-RUN wget https://raw.githubusercontent.com/netz98/n98-magerun/master/n98-magerun.phar &&\
+RUN wget http://files.magerun.net/n98-magerun-latest.phar -O n98-magerun.phar &&\
     mv n98-magerun.phar /usr/local/bin/n98-magerun &&\
     chmod +x /usr/local/bin/n98-magerun
 COPY /etc/n98-magerun.yaml /etc/n98-magerun.yaml
@@ -35,12 +37,9 @@ COPY /etc/n98-magerun.yaml /etc/n98-magerun.yaml
 # Create a command to generate a sample app
 # and the default command to start the container
 COPY /usr/local/bin/generate-app /usr/local/bin/generate-app
-COPY /usr/local/bin/start-service /usr/local/bin/start-service
-RUN chmod +x /usr/local/bin/generate-app  /usr/local/bin/start-service
+RUN chmod +x /usr/local/bin/generate-app
 
 USER dev
 
 # Copy useful resources for the generate-app command
 COPY /home/dev/resources/local.xml /home/dev/resources/local.xml
-
-CMD ["start-service"]

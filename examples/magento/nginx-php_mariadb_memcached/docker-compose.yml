@@ -11,13 +11,18 @@ web:
    - ./src:/var/www/magento
    - ./docker-compose/data/log/nginx:/var/log/nginx
 db:
-  image: alexisno/mariadb-dev
+  image: mariadb
   ports:
    - "3306:3306"
-  volumes:
-   - ./docker-compose/data/mysql:/var/lib/mysql
+  volumes_from:
+   - magento-data
+  environment:
+    MYSQL_ROOT_PASSWORD: root
+    MYSQL_DATABASE: magento
+    MYSQL_USER: magento
+    MYSQL_PASSWORD: magento
 memcached:
-  image: alexisno/memcached-dev
+  image: memcached
 mailcatcher:
   image: alexisno/mailcatcher-dev
   ports:

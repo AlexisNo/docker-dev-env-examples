@@ -50,5 +50,7 @@ RUN ln -s /etc/nginx/sites-available/phpinfo.conf /etc/nginx/sites-enabled/phpin
 COPY /usr/local/bin/start-service /usr/local/bin/start-service
 RUN chmod +x /usr/local/bin/start-service
 
+# We want the default user to be "dev"
+# Meanwhile php5-fpm and nginx must be launch with sudo
+USER dev
 CMD ["start-service"]
-

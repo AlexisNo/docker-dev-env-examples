@@ -1,13 +1,14 @@
 #!/bin/bash
 
 cd /var/www/magento
-n98-magerun install --dbHost="db"\
-                    --dbUser="root"\
-                    --dbPass=""\
+n98-magerun install --noDownload\
+                    --forceUseDb=true\
+                    --dbHost="db"\
+                    --dbUser="magento"\
+                    --dbPass="magento"\
                     --dbName="magento"\
                     --installSampleData=no\
                     --useDefaultConfigParams=yes\
-                    --magentoVersionByName="magento-ce-1.9.1.0"\
                     --installationFolder="."\
                     --baseUrl=$ADMIN_ADDRESS
 cp /home/dev/resources/local.xml /var/www/magento/app/etc/local.xml

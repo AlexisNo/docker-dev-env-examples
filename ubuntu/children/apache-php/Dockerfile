@@ -60,4 +60,7 @@ EXPOSE 80 443
 COPY /usr/local/bin/start-service /usr/local/bin/start-service
 RUN chmod +x /usr/local/bin/start-service
 
+# We want the default user to be "dev"
+# Meanwhile apache must be launch with sudo
+USER dev
 CMD ["start-service"]

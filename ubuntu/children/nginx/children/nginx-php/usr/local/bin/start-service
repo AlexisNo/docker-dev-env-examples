@@ -1,4 +1,6 @@
 #!/bin/bash
 
-service php5-fpm start
-nginx
+# We want the default user of the container to be "dev"
+# Meanwhile php5-fpm and nginx must be launch with sudo
+sudo service php5-fpm start
+sudo nginx
