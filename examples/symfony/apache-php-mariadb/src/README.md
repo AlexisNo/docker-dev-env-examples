@@ -1,4 +1,4 @@
-Put here your project sources or generate a sample app
-```
-$ docker exec <web-container-id> generate-app
-```
+my-project
+==========
+
+A Symfony project created on November 5, 2015, 9:05 pm.

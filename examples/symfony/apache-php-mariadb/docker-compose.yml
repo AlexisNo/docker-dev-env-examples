@@ -10,11 +10,16 @@ web:
    - ./src:/var/www/symfony
    - ./docker-compose/data/log/apache2:/var/log/apache2
 db:
-  image: alexisno/mariadb-dev
+  image: mariadb
   ports:
    - "3306:3306"
-  volumes:
-   - ./docker-compose/data/mysql:/var/lib/mysql
+  volumes_from:
+   - symfony-data
+  environment:
+    MYSQL_ROOT_PASSWORD: root
+    MYSQL_DATABASE: symfony
+    MYSQL_USER: symfony
+    MYSQL_PASSWORD: symfony
 mailcatcher:
   image: alexisno/mailcatcher-dev
   ports:

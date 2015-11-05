@@ -1,7 +1,9 @@
 FROM alexisno/nginx-php-dev
 
-# Uncomment the following lines and enter the host user UID if necessary
-#RUN change-dev-id 1002
+USER root
+
+# Uncomment the following line and enter the host user UID if necessary
+RUN change-dev-id 1001
 
 ENV SYMFONY_ADDRESS=symfony.local
 
@@ -25,14 +27,10 @@ RUN curl -LsS http://symfony.com/installer > symfony.phar && \
     chmod a+x /usr/local/bin/symfony
 
 # Create a command to generate a sample app
-# and the default command to start the container
 COPY /usr/local/bin/generate-app /usr/local/bin/generate-app
-COPY /usr/local/bin/start-service /usr/local/bin/start-service
-RUN chmod +x /usr/local/bin/generate-app  /usr/local/bin/start-service
+RUN chmod +x /usr/local/bin/generate-app
 
 USER dev
 
 # Copy useful resources for the default command
 COPY /home/dev/resources/parameters.yml /home/dev/resources/parameters.yml
-
-CMD ["start-service"]

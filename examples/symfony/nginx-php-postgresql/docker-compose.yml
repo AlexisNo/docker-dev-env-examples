@@ -10,11 +10,14 @@ web:
    - ./src:/var/www/symfony
    - ./docker-compose/data/log/nginx:/var/log/nginx
 db:
-  image: alexisno/postgresql-dev
+  image: postgres
   ports:
-   - "3306:3306"
-  volumes:
-   - ./docker-compose/data/postgresql:/var/lib/postgresql
+   - "5432:5432"
+  volumes_from:
+   - symfony-data
+  environment:
+    POSTGRES_PASSWORD: "symfony"
+    POSTGRES_USER: "symfony"
 mailcatcher:
   image: alexisno/mailcatcher-dev
   ports:

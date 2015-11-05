@@ -1,10 +1,10 @@
 #!/bin/bash
 
-cd ~
-wget -O symfony.tgz http://symfony.com/download\?v\=Symfony_Standard_Vendors_2.3.23.tgz
-tar zxvf symfony.tgz
-mv Symfony/* /var/www/symfony
-rm symfony.tgz
+# Install symfony
+cd /var/www/symfony
+symfony new my-project
+mv my-project/* .
+rm -R my-project
 cp /home/dev/resources/parameters.yml /var/www/symfony/app/config/parameters.yml
 
 # Allow access to app_dev.php and config.php from host

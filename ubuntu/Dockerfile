@@ -5,7 +5,7 @@ MAINTAINER Alexis N-o "alexis@henaut.net"
 
 # Install basic packages.
 RUN apt-get update &&\
-    apt-get install -y software-properties-common zsh curl wget git htop unzip vim telnet &&\
+    apt-get install -y software-properties-common zsh curl wget git htop unzip vim telnet python3 python3-pip &&\
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Install oh-my-zsh and define zsh as default shell
