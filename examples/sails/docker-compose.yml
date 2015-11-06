@@ -4,6 +4,7 @@ web:
    - nodejs
   ports:
    - "80:80"
+   - "443:443"
 nodejs:
   build: ./docker-compose/nodejs/
   links:
@@ -12,7 +13,7 @@ nodejs:
   volumes:
    - ./src:/var/www/sails-app
 db:
-  image: alexisno/mongodb-dev
+  image: mongo
   ports:
    - "27017:27017"
   volumes:

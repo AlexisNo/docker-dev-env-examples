@@ -1,9 +1,9 @@
 FROM alexisno/nodejs-dev
 
 # Uncomment the following lines and enter the host user UID if necessary
-#USER root
-#RUN change-dev-id 1002
-#USER dev
+USER root
+RUN change-dev-id 1001
+USER dev
 
 # Install sails globally
 RUN npm install -g sails
