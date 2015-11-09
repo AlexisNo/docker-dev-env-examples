@@ -21,6 +21,6 @@ db:
     MYSQL_USER: symfony
     MYSQL_PASSWORD: symfony
 mailcatcher:
-  image: alexisno/mailcatcher-dev
+  image: alexisno/mailcatcher
   ports:
    - "1080:1080"

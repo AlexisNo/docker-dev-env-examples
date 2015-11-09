@@ -19,6 +19,6 @@ db:
     POSTGRES_PASSWORD: "symfony"
     POSTGRES_USER: "symfony"
 mailcatcher:
-  image: alexisno/mailcatcher-dev
+  image: alexisno/mailcatcher
   ports:
    - "1080:1080"

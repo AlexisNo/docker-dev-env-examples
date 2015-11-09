@@ -24,6 +24,6 @@ db:
 memcached:
   image: memcached
 mailcatcher:
-  image: alexisno/mailcatcher-dev
+  image: alexisno/mailcatcher
   ports:
    - "1080:1080"

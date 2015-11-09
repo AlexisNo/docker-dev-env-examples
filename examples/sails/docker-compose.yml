@@ -19,6 +19,6 @@ db:
   volumes:
    - ./docker-compose/data/mongodb:/data/db
 mailcatcher:
-  image: alexisno/mailcatcher-dev
+  image: alexisno/mailcatcher
   ports:
    - "1080:1080"
