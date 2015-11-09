@@ -1,5 +1,0 @@
-#!/bin/bash
-
-# We want the default user to be "dev"
-# Meanwhile apache must be launch with sudo
-sudo /bin/bash -c "source /etc/apache2/envvars && exec /usr/sbin/apache2 -DFOREGROUND"

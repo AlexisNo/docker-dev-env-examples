@@ -1,0 +1,3 @@
+[submodule "docker-ubuntu-dev"]
+	path = docker-ubuntu-dev
+	url = git@github.com:AlexisNo/docker-ubuntu-dev.git
