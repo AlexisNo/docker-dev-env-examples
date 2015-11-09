@@ -1,3 +1,21 @@
 [submodule "docker-ubuntu-dev"]
 	path = docker-ubuntu-dev
 	url = git@github.com:AlexisNo/docker-ubuntu-dev.git
+[submodule "docker-apache-php-dev"]
+	path = docker-apache-php-dev
+	url = git@github.com:AlexisNo/docker-apache-php-dev.git
+[submodule "docker-nginx-dev"]
+	path = docker-nginx-dev
+	url = git@github.com:AlexisNo/docker-nginx-dev.git
+[submodule "docker-nginx-php-dev"]
+	path = docker-nginx-php-dev
+	url = git@github.com:AlexisNo/docker-nginx-php-dev.git
+[submodule "docker-nodejs-dev"]
+	path = docker-nodejs-dev
+	url = git@github.com:AlexisNo/docker-nodejs-dev.git
+[submodule "docker-python-dev"]
+	path = docker-python-dev
+	url = git@github.com:AlexisNo/docker-python-dev.git
+[submodule "docker-mailcatcher"]
+	path = docker-mailcatcher
+	url = git@github.com:AlexisNo/docker-mailcatcher.git
