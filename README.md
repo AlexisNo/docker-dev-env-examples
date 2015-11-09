@@ -1,3 +1,3 @@
-Dockerfiles to use for development environment.
+Examples of development environments with Docker.
 
-Tutorials related to this repository on http://www.ano.io/monter-ses-environnements-de-developpement-avec-docker-partie-1/ (in French)
+Blog article related to this repository on [www.ano.io](http://www.ano.io/monter-ses-environnements-de-developpement-avec-docker-partie-3/) (in French)
